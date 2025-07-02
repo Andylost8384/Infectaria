@@ -32,8 +32,8 @@
       font-size: 1rem;
     }
     .video-section {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: 20px;
       padding: 20px;
     }
@@ -42,10 +42,6 @@
       padding: 15px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255,255,255,0.1);
-      transition: transform 0.2s ease;
-    }
-    .video-card:hover {
-      transform: scale(1.02);
     }
     .thumbnail {
       width: 100%;
@@ -80,6 +76,10 @@
       color: #ff2e63;
       font-weight: bold;
     }
+    a.video-link {
+      text-decoration: none;
+      color: inherit;
+    }
   </style>
 </head>
 <body>
@@ -91,7 +91,7 @@
   <section class="video-section">
     <!-- Video 1 -->
     <div class="video-card">
-      <a href="the-succubus-act-3.html" style="text-decoration: none; color: inherit;">
+      <a class="video-link" href="the-succubus-act-3.html">
         <div class="thumbnail">[Thumbnail Image]</div>
         <div class="video-title">The Succubus Act 3</div>
         <div class="video-meta">Leana Lovings, Rikako Katayama</div>
@@ -102,7 +102,7 @@
 
     <!-- Video 2 -->
     <div class="video-card">
-      <a href="the-succubus-act-2.html" style="text-decoration: none; color: inherit;">
+      <a class="video-link" href="the-succubus-act-2.html">
         <div class="thumbnail">[Thumbnail Image]</div>
         <div class="video-title">The Succubus Act 2</div>
         <div class="video-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
@@ -113,7 +113,7 @@
 
     <!-- Video 3 -->
     <div class="video-card">
-      <a href="the-succubus-act-1.html" style="text-decoration: none; color: inherit;">
+      <a class="video-link" href="the-succubus-act-1.html">
         <div class="thumbnail">[Thumbnail Image]</div>
         <div class="video-title">The Succubus Act 1</div>
         <div class="video-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
