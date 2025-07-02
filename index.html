@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Infectaria - Most Watched</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Infectaria - New Scenes</title>
   <style>
     body {
       margin: 0;
@@ -11,12 +11,50 @@
       background-color: #0a0a0a;
       color: #fff;
     }
-    header {
-      text-align: center;
-      padding: 2rem;
-      font-size: 2rem;
-      font-weight: bold;
+    nav {
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
     }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .join-btn {
+      background: linear-gradient(to right, #7f00ff, #e100ff);
+      padding: 8px 16px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .section-header {
+      margin: 20px 0 0;
+      padding: 10px 20px;
+      background: linear-gradient(to right, #e94057, #4a00e0);
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      display: inline-block;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+
     .video-section {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -35,6 +73,10 @@
       background-color: #333;
       margin-bottom: 10px;
       border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
     }
     .video-title {
       font-size: 1.1rem;
@@ -50,7 +92,7 @@
       font-size: 0.85rem;
       color: #bbb;
     }
-    .join-btn {
+    .video-card a.join-btn {
       display: inline-block;
       margin-top: 10px;
       padding: 6px 12px;
@@ -71,7 +113,20 @@
   </style>
 </head>
 <body>
-  <header>Most Watched</header>
+
+  <!-- Top Navigation -->
+  <nav>
+    <div class="logo">Infectaria</div>
+    <div class="nav-links">
+      <a href="#">ALL VIDEOS</a>
+      <a class="join-btn" href="https://t.me/+S62zars0zZc5M2E1" target="_blank">JOIN NOW</a>
+    </div>
+  </nav>
+
+  <!-- Section Header -->
+  <div class="section-header">NEW SCENES ★</div>
+
+  <!-- Video Section -->
   <section class="video-section">
     <div class="video-card">
       <div class="thumbnail">[Thumbnail Image Here]</div>
@@ -102,5 +157,7 @@
   <div class="footer">
     <a href="#">View All Videos</a>
   </div>
+
 </body>
 </html>
+
