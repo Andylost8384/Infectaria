@@ -134,8 +134,8 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 140px;
-      max-width: 22vw;
+      width: 220px; /* increased */
+      max-width: 28vw;
       z-index: 999;
       animation: floatHand 2.5s infinite ease-in-out;
     }
@@ -145,13 +145,13 @@
         transform: translateY(0) rotate(0deg);
       }
       50% {
-        transform: translateY(-4px) rotate(-2deg);
+        transform: translateY(-6px) rotate(-2deg);
       }
     }
 
     @media (max-width: 600px) {
       .floating-model {
-        width: 90px;
+        width: 120px;
       }
     }
   </style>
@@ -184,28 +184,30 @@
     </div>
   </div>
 
-  /* Floating Image (Live Model) */
-.floating-model {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 220px; /* increased from 140px */
-  max-width: 28vw;
-  z-index: 999;
-  animation: floatHand 2.5s infinite ease-in-out;
-}
+  <!-- Related Videos -->
+  <h3 class="related-header">Related Videos</h3>
+  <div class="related-container">
+    <div class="related-card">
+      <div class="related-thumb">[Thumbnail]</div>
+      <div class="related-title">The Succubus Act 2</div>
+      <div class="related-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
+      <div class="related-tags">Bukkake, Lesbian, Tentacles</div>
+      <a href="the-succubus-act-2.html" class="related-link">View</a>
+    </div>
+    <div class="related-card">
+      <div class="related-thumb">[Thumbnail]</div>
+      <div class="related-title">The Succubus Act 1</div>
+      <div class="related-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
+      <div class="related-tags">Teen, Creampie, Tentacles</div>
+      <a href="the-succubus-act-1.html" class="related-link">View</a>
+    </div>
+  </div>
 
-@keyframes floatHand {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-6px) rotate(-2deg);
-  }
-}
-
-@media (max-width: 600px) {
-  .floating-model {
-    width: 120px; /* better for mobile */
+  <!-- Floating animated model -->
+  <img
+    class="floating-model"
+    src="https://i.ibb.co/gMY8FpTQ/Chat-GPT-Image-Jul-2-2025-06-39-05-PM-Photoroom.png"
+    alt="Animated Girl"
+/>
 </body>
 </html>
