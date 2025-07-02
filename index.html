@@ -11,50 +11,26 @@
       background-color: #0a0a0a;
       color: #fff;
     }
-    nav {
-      background-color: #000;
+    header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 10px 20px;
-    }
-    .logo {
+      align-items: center;
+      padding: 1.5rem 2rem;
       font-size: 1.8rem;
       font-weight: bold;
-      color: white;
+      background-color: #111;
     }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+    header .title {
+      color: #ff2e63;
     }
-    .nav-links a {
-      color: white;
+    header a {
       text-decoration: none;
-      font-weight: bold;
+      background-color: #ff2e63;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 5px;
       font-size: 1rem;
     }
-    .join-btn {
-      background: linear-gradient(to right, #7f00ff, #e100ff);
-      padding: 8px 16px;
-      border-radius: 8px;
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .section-header {
-      margin: 20px 0 0;
-      padding: 10px 20px;
-      background: linear-gradient(to right, #e94057, #4a00e0);
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: white;
-      display: inline-block;
-      border-top-right-radius: 6px;
-      border-bottom-right-radius: 6px;
-    }
-
     .video-section {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -66,6 +42,10 @@
       padding: 15px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255,255,255,0.1);
+      transition: transform 0.2s ease;
+    }
+    .video-card:hover {
+      transform: scale(1.02);
     }
     .thumbnail {
       width: 100%;
@@ -73,9 +53,8 @@
       background-color: #333;
       margin-bottom: 10px;
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
+      line-height: 140px;
       color: #999;
     }
     .video-title {
@@ -92,7 +71,7 @@
       font-size: 0.85rem;
       color: #bbb;
     }
-    .video-card a.join-btn {
+    .join-btn {
       display: inline-block;
       margin-top: 10px;
       padding: 6px 12px;
@@ -100,6 +79,7 @@
       color: white;
       border-radius: 6px;
       text-decoration: none;
+      font-weight: bold;
     }
     .footer {
       text-align: center;
@@ -113,51 +93,51 @@
   </style>
 </head>
 <body>
+  <header>
+    <div class="title">Infectaria</div>
+    <a href="all-videos.html">All Videos</a>
+  </header>
 
-  <!-- Top Navigation -->
-  <nav>
-    <div class="logo">Infectaria</div>
-    <div class="nav-links">
-      <a href="#">ALL VIDEOS</a>
-      <a class="join-btn" href="https://t.me/+S62zars0zZc5M2E1" target="_blank">JOIN NOW</a>
-    </div>
-  </nav>
-
-  <!-- Section Header -->
-  <div class="section-header">NEW SCENES ★</div>
-
-  <!-- Video Section -->
   <section class="video-section">
-    <div class="video-card">
-      <div class="thumbnail">[Thumbnail Image Here]</div>
-      <div class="video-title">The Succubus Act 3</div>
-      <div class="video-meta">Leana Lovings, Rikako Katayama</div>
-      <div class="video-meta">Duration: 34:22 | Posted: June 27, 2025</div>
-      <div class="tags">Asian, Creampie, Lesbian, Tentacles</div>
-      <a class="join-btn" href="https://t.me/+S62zars0zZc5M2E1" target="_blank">JOIN NOW</a>
-    </div>
-    <div class="video-card">
-      <div class="thumbnail">[Thumbnail Image Here]</div>
-      <div class="video-title">The Succubus Act 2</div>
-      <div class="video-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
-      <div class="video-meta">Duration: 27:07 | Posted: June 13, 2025</div>
-      <div class="tags">Bukkake, Creampie, Lesbian, Tentacles, Vore</div>
-      <a class="join-btn" href="https://t.me/+S62zars0zZc5M2E1" target="_blank">JOIN NOW</a>
-    </div>
-    <div class="video-card">
-      <div class="thumbnail">[Thumbnail Image Here]</div>
-      <div class="video-title">The Succubus Act 1</div>
-      <div class="video-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
-      <div class="video-meta">Duration: 29:22 | Posted: May 30, 2025</div>
-      <div class="tags">Bukkake, Creampie, Teen, Tentacles</div>
-      <a class="join-btn" href="https://t.me/+S62zars0zZc5M2E1" target="_blank">JOIN NOW</a>
-    </div>
+    <!-- Video 1 -->
+    <a href="the-succubus-act-3.html" style="text-decoration: none; color: inherit;">
+      <div class="video-card">
+        <div class="thumbnail">[Thumbnail Image]</div>
+        <div class="video-title">The Succubus Act 3</div>
+        <div class="video-meta">Leana Lovings, Rikako Katayama</div>
+        <div class="video-meta">Duration: 34:22 | Posted: June 27, 2025</div>
+        <div class="tags">Asian, Creampie, Lesbian, Tentacles</div>
+        <a class="join-btn" href="https://t.me/+S62zars0zZc5M2E1" target="_blank">JOIN NOW</a>
+      </div>
+    </a>
+
+    <!-- Video 2 -->
+    <a href="the-succubus-act-2.html" style="text-decoration: none; color: inherit;">
+      <div class="video-card">
+        <div class="thumbnail">[Thumbnail Image]</div>
+        <div class="video-title">The Succubus Act 2</div>
+        <div class="video-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
+        <div class="video-meta">Duration: 27:07 | Posted: June 13, 2025</div>
+        <div class="tags">Bukkake, Creampie, Lesbian, Tentacles, Vore</div>
+        <a class="join-btn" href="https://t.me/+S62zars0zZc5M2E1" target="_blank">JOIN NOW</a>
+      </div>
+    </a>
+
+    <!-- Video 3 -->
+    <a href="the-succubus-act-1.html" style="text-decoration: none; color: inherit;">
+      <div class="video-card">
+        <div class="thumbnail">[Thumbnail Image]</div>
+        <div class="video-title">The Succubus Act 1</div>
+        <div class="video-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
+        <div class="video-meta">Duration: 29:22 | Posted: May 30, 2025</div>
+        <div class="tags">Bukkake, Creampie, Teen, Tentacles</div>
+        <a class="join-btn" href="https://t.me/+S62zars0zZc5M2E1" target="_blank">JOIN NOW</a>
+      </div>
+    </a>
   </section>
 
   <div class="footer">
-    <a href="#">View All Videos</a>
+    <a href="all-videos.html">View All Videos</a>
   </div>
-
 </body>
 </html>
-
