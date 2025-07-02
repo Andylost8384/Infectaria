@@ -184,30 +184,82 @@
     </div>
   </div>
 
-  <!-- Related Videos -->
-  <h3 class="related-header">Related Videos</h3>
-  <div class="related-container">
-    <div class="related-card">
-      <div class="related-thumb">[Thumbnail]</div>
-      <div class="related-title">The Succubus Act 2</div>
-      <div class="related-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
-      <div class="related-tags">Bukkake, Lesbian, Tentacles</div>
-      <a href="the-succubus-act-2.html" class="related-link">View</a>
-    </div>
-    <div class="related-card">
-      <div class="related-thumb">[Thumbnail]</div>
-      <div class="related-title">The Succubus Act 1</div>
-      <div class="related-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
-      <div class="related-tags">Teen, Creampie, Tentacles</div>
-      <a href="the-succubus-act-1.html" class="related-link">View</a>
-    </div>
+  <!-- Floating Animated Model -->
+<div class="floating-model">
+  <div class="model-wrapper">
+    <img src="https://i.ibb.co/gMY8FpTQ/Chat-GPT-Image-Jul-2-2025-06-39-05-PM-Photoroom.png" alt="Model" class="model-image" />
+    <div class="hand-pointer"></div>
+    <div class="blink-eyes"></div>
   </div>
+</div>
 
-  <!-- Floating animated model -->
-  <img
-    class="floating-model"
-    src="https://i.ibb.co/gMY8FpTQ/Chat-GPT-Image-Jul-2-2025-06-39-05-PM-Photoroom.png"
-    alt="Animated Girl"
+<style>
+  .floating-model {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+    max-height: 420px;
+    z-index: 999;
+    pointer-events: none;
+  }
+
+  .model-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .model-image {
+    width: 100%;
+    animation: blink 6s infinite;
+  }
+
+  /* Hand pointing effect */
+  .hand-pointer {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    bottom: 50px;
+    left: -20px;
+    background: url('https://cdn-icons-png.flaticon.com/512/109/109618.png') no-repeat center center;
+    background-size: contain;
+    animation: handMove 2s infinite ease-in-out;
+    transform-origin: bottom right;
+    z-index: 1000;
+  }
+
+  @keyframes handMove {
+    0%, 100% {
+      transform: rotate(0deg) translateY(0px);
+    }
+    50% {
+      transform: rotate(-15deg) translateY(-5px);
+    }
+  }
+
+  /* Blink effect on whole image */
+  @keyframes blink {
+    0%, 90%, 100% {
+      filter: brightness(1);
+    }
+    92%, 96% {
+      filter: brightness(0.6);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .floating-model {
+      width: 160px;
+      max-height: 220px;
+    }
+    .hand-pointer {
+      width: 20px;
+      height: 20px;
+      left: -10px;
+      bottom: 20px;
+    }
+  }
+</style>
   />
 </body>
 </html>
