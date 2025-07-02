@@ -12,6 +12,7 @@
       margin: 0;
       padding: 0;
     }
+
     .navbar {
       background-color: #0a0a0a;
       padding: 1rem 2rem;
@@ -21,6 +22,7 @@
       font-size: 1.5rem;
       margin: 0;
     }
+
     .container {
       display: flex;
       flex-wrap: wrap;
@@ -126,6 +128,32 @@
       font-weight: bold;
       text-decoration: none;
     }
+
+    /* Floating Image (Live Model) */
+    .floating-model {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 140px;
+      max-width: 22vw;
+      z-index: 999;
+      animation: floatHand 2.5s infinite ease-in-out;
+    }
+
+    @keyframes floatHand {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-4px) rotate(-2deg);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .floating-model {
+        width: 90px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -174,6 +202,12 @@
       <a href="the-succubus-act-1.html" class="related-link">View</a>
     </div>
   </div>
+
+  <!-- Floating animated model -->
+  <img
+    class="floating-model"
+    src="https://i.ibb.co/gMY8FpTQ/Chat-GPT-Image-Jul-2-2025-06-39-05-PM-Photoroom.png"
+    alt="Animated Girl"
+  />
 </body>
 </html>
-
