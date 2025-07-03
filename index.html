@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Infectaria - New Scenes</title>
+  <title>Infectaria - Home</title>
   <style>
     body {
       margin: 0;
@@ -12,35 +12,72 @@
       color: #fff;
     }
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
       background-color: #0a0a0a;
+      padding: 1rem 2rem 0 2rem; /* Removed bottom padding to close gap */
     }
     .logo {
       font-size: 1.8rem;
       font-weight: bold;
       color: #ff2e63;
     }
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
+
+    .hero-section {
+      position: relative;
+      height: 90vh;
+      overflow: hidden;
+    }
+    .hero-section video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7);
+    }
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      transform: translateY(-50%);
+    }
+    .hero-content h1 {
+      font-size: 3rem;
       font-weight: bold;
     }
-    .nav-links a:hover {
-      text-decoration: underline;
+    .hero-content h1 span {
+      color: #ff2e63;
     }
-    .all-videos-btn {
-      background: #ff2e63;
+    .hero-content p {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      color: #ccc;
+    }
+    .hero-content a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: linear-gradient(90deg, #ff2e63, #bb55ff);
       color: white;
-      padding: 8px 14px;
+      font-weight: bold;
       border: none;
       border-radius: 6px;
       text-decoration: none;
+    }
+    .hero-bottom {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      background-color: rgba(0, 0, 0, 0.4);
       font-weight: bold;
     }
+    .hero-bottom span {
+      color: white;
+    }
+    .hero-bottom .highlight {
+      color: #ff2e63;
+    }
+
     .section-title {
       background: linear-gradient(to right, #ff5f7e, #3d0b14);
       padding: 10px 20px;
@@ -50,37 +87,45 @@
       margin: 20px auto;
       border-radius: 4px;
     }
+
     .video-section {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      padding: 0 0 40px 0;
+      padding: 0 20px 40px;
     }
+
     .video-card {
       position: relative;
-      width: 100%;
       overflow: hidden;
-      border-radius: 10px;
+      border-radius: 12px;
     }
     .video-card video {
       width: 100%;
-      height: auto;
-      display: block;
+      height: 100%;
+      object-fit: cover;
     }
     .video-title {
       position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: rgba(0, 0, 0, 0.6);
+      bottom: 8px;
+      left: 8px;
+      background: none;
       color: white;
-      padding: 4px 10px;
+      font-weight: bold;
       font-size: 1rem;
-      border-radius: 4px;
+      padding: 2px 6px;
+    }
+
+    .video-card video {
       pointer-events: none;
+    }
+    .video-card:hover video {
+      pointer-events: auto;
+      autoplay: true;
     }
     .footer {
       text-align: center;
-      margin: 30px;
+      margin: 20px;
     }
     .footer a {
       text-decoration: none;
@@ -92,35 +137,47 @@
 <body>
   <header>
     <div class="logo">Infectaria</div>
-    <div class="nav-links">
-      <a class="all-videos-btn" href="#">All Videos</a>
-    </div>
   </header>
 
-  <div class="section-title">NEW SCENES</div>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <video autoplay muted loop playsinline>
+      <source src="https://files.catbox.moe/g8fhyh.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-content">
+      <h1>BEST REAL LIFE <span>HENTAI</span></h1>
+      <p>Your top source for premium tentacle and alien pornography.</p>
+      <a href="https://t.me/+S62zars0zZc5M2E1" target="_blank">JOIN NOW</a>
+    </div>
+    <div class="hero-bottom">
+      <span><span class="highlight">+200</span> SEX SCENES</span>
+      <span>NEW FILMS <span class="highlight">WEEKLY</span></span>
+      <span><span class="highlight">REAL</span> ACTRESSES</span>
+    </div>
+  </section>
 
+  <!-- New Scenes -->
+  <div class="section-title">NEW SCENES</div>
   <section class="video-section">
     <div class="video-card">
       <a href="the-succubus-act-3.html">
-        <video muted preload="none" poster="" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;">
+        <video muted loop preload="none" poster="">
           <source src="https://files.catbox.moe/g8fhyh.mp4" type="video/mp4" />
         </video>
         <div class="video-title">The Succubus Act 3</div>
       </a>
     </div>
-
     <div class="video-card">
       <a href="the-succubus-act-2.html">
-        <video muted preload="none" poster="" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;">
+        <video muted loop preload="none" poster="">
           <source src="https://files.catbox.moe/xtt9xk.mp4" type="video/mp4" />
         </video>
         <div class="video-title">The Succubus Act 2</div>
       </a>
     </div>
-
     <div class="video-card">
       <a href="the-succubus-act-1.html">
-        <video muted preload="none" poster="" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;">
+        <video muted loop preload="none" poster="">
           <source src="https://files.catbox.moe/25v1uz.mp4" type="video/mp4" />
         </video>
         <div class="video-title">The Succubus Act 1</div>
