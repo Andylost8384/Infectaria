@@ -3,190 +3,166 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Infectaria - Home</title>
+  <title>Infectaria</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0a0a0a;
-      color: #fff;
-    }
-    header {
-      background-color: #0a0a0a;
-      padding: 1rem 2rem 0 2rem; /* Removed bottom padding to close gap */
-    }
-    .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #ff2e63;
+      background-color: #0e0e0e;
+      color: white;
     }
 
-    .hero-section {
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      color: #f43672;
+      font-size: 28px;
+      margin: 0;
+    }
+
+    .hero {
       position: relative;
-      height: 90vh;
+      width: 100%;
+      height: 80vh;
       overflow: hidden;
     }
-    .hero-section video {
+
+    .hero video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.7);
     }
+
     .hero-content {
       position: absolute;
-      top: 50%;
+      top: 30%;
       left: 5%;
-      transform: translateY(-50%);
+      color: white;
     }
-    .hero-content h1 {
-      font-size: 3rem;
+
+    .hero-content h2 {
+      font-size: 42px;
       font-weight: bold;
+      margin: 0;
     }
-    .hero-content h1 span {
-      color: #ff2e63;
+
+    .hero-content h2 span {
+      color: #f43672;
     }
+
     .hero-content p {
-      font-size: 1.1rem;
       margin-top: 10px;
+      font-size: 16px;
       color: #ccc;
     }
-    .hero-content a {
-      display: inline-block;
+
+    .hero-content a.button {
       margin-top: 20px;
-      padding: 10px 20px;
-      background: linear-gradient(90deg, #ff2e63, #bb55ff);
+      display: inline-block;
+      padding: 12px 30px;
+      background: linear-gradient(to right, #f43672, #8b2cf5);
       color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
+      border-radius: 5px;
       text-decoration: none;
+      font-weight: bold;
     }
-    .hero-bottom {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
+
+    .stats {
       display: flex;
       justify-content: space-around;
-      padding: 10px 0;
-      background-color: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+    }
+
+    .stats div {
+      text-align: center;
       font-weight: bold;
     }
-    .hero-bottom span {
-      color: white;
-    }
-    .hero-bottom .highlight {
-      color: #ff2e63;
+
+    .stats span {
+      color: #f43672;
     }
 
     .section-title {
-      background: linear-gradient(to right, #ff5f7e, #3d0b14);
-      padding: 10px 20px;
-      font-size: 1.4rem;
+      margin: 30px 0 10px 30px;
+      font-size: 18px;
       font-weight: bold;
-      width: fit-content;
-      margin: 20px auto;
-      border-radius: 4px;
+      color: white;
     }
 
-    .video-section {
+    .video-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding: 0 20px 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 0 40px 0;
     }
 
     .video-card {
       position: relative;
       overflow: hidden;
-      border-radius: 12px;
-    }
-    .video-card video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .video-title {
-      position: absolute;
-      bottom: 8px;
-      left: 8px;
-      background: none;
-      color: white;
-      font-weight: bold;
-      font-size: 1rem;
-      padding: 2px 6px;
     }
 
     .video-card video {
+      width: 100%;
+      display: block;
+    }
+
+    .video-title {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: none;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
       pointer-events: none;
     }
-    .video-card:hover video {
-      pointer-events: auto;
-      autoplay: true;
-    }
-    .footer {
-      text-align: center;
-      margin: 20px;
-    }
-    .footer a {
-      text-decoration: none;
-      color: #ff2e63;
-      font-weight: bold;
+
+    .video-card video:hover {
+      filter: brightness(1.1);
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">Infectaria</div>
+    <h1>Infectaria</h1>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <video autoplay muted loop playsinline>
-      <source src="https://files.catbox.moe/g8fhyh.mp4" type="video/mp4" />
-    </video>
+  <div class="hero">
+    <video src="videos/hero-preview.mp4" autoplay muted loop playsinline></video>
     <div class="hero-content">
-      <h1>BEST REAL LIFE <span>HENTAI</span></h1>
+      <h2>BEST REAL LIFE <span>HENTAI</span></h2>
       <p>Your top source for premium tentacle and alien pornography.</p>
-      <a href="https://t.me/+S62zars0zZc5M2E1" target="_blank">JOIN NOW</a>
+      <a class="button" href="https://t.me/AsiaModelMedia">JOIN NOW</a>
     </div>
-    <div class="hero-bottom">
-      <span><span class="highlight">+200</span> SEX SCENES</span>
-      <span>NEW FILMS <span class="highlight">WEEKLY</span></span>
-      <span><span class="highlight">REAL</span> ACTRESSES</span>
-    </div>
-  </section>
+  </div>
 
-  <!-- New Scenes -->
+  <div class="stats">
+    <div><span>+200</span> SEX SCENES</div>
+    <div>NEW FILMS <span>WEEKLY</span></div>
+    <div><span>REAL</span> ACTRESSES</div>
+  </div>
+
   <div class="section-title">NEW SCENES</div>
-  <section class="video-section">
-    <div class="video-card">
-      <a href="the-succubus-act-3.html">
-        <video muted loop preload="none" poster="">
-          <source src="https://files.catbox.moe/g8fhyh.mp4" type="video/mp4" />
-        </video>
-        <div class="video-title">The Succubus Act 3</div>
-      </a>
-    </div>
-    <div class="video-card">
-      <a href="the-succubus-act-2.html">
-        <video muted loop preload="none" poster="">
-          <source src="https://files.catbox.moe/xtt9xk.mp4" type="video/mp4" />
-        </video>
-        <div class="video-title">The Succubus Act 2</div>
-      </a>
-    </div>
-    <div class="video-card">
-      <a href="the-succubus-act-1.html">
-        <video muted loop preload="none" poster="">
-          <source src="https://files.catbox.moe/25v1uz.mp4" type="video/mp4" />
-        </video>
-        <div class="video-title">The Succubus Act 1</div>
-      </a>
-    </div>
-  </section>
 
-  <div class="footer">
-    <a href="#">View All Videos</a>
+  <div class="video-grid">
+    <div class="video-card">
+      <video src="videos/succubus3.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+      <div class="video-title">The Succubus Act 3</div>
+    </div>
+    <div class="video-card">
+      <video src="videos/succubus2.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+      <div class="video-title">The Succubus Act 2</div>
+    </div>
+    <div class="video-card">
+      <video src="videos/succubus1.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+      <div class="video-title">The Succubus Act 1</div>
+    </div>
   </div>
 </body>
 </html>
