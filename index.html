@@ -47,39 +47,36 @@
       font-size: 1.4rem;
       font-weight: bold;
       width: fit-content;
-      margin: 20px 0 0 20px;
+      margin: 20px auto;
       border-radius: 4px;
     }
     .video-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      padding: 20px;
+      padding: 0 0 40px 0;
     }
     .video-card {
-      background-color: #1a1a1a;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.1);
-    }
-    .video-preview video {
+      position: relative;
       width: 100%;
-      border-radius: 8px;
-      cursor: pointer;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .video-card video {
+      width: 100%;
+      height: auto;
+      display: block;
     }
     .video-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      margin: 10px 0 6px;
-    }
-    .video-meta {
-      font-size: 0.9rem;
-      color: #ccc;
-    }
-    .tags {
-      margin: 10px 0;
-      font-size: 0.85rem;
-      color: #bbb;
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 4px 10px;
+      font-size: 1rem;
+      border-radius: 4px;
+      pointer-events: none;
     }
     .footer {
       text-align: center;
@@ -103,49 +100,31 @@
   <div class="section-title">NEW SCENES</div>
 
   <section class="video-section">
-    <!-- ACT 3 -->
     <div class="video-card">
       <a href="the-succubus-act-3.html">
-        <div class="video-preview">
-          <video muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime = 0;">
-            <source src="https://files.catbox.moe/g8fhyh.mp4" type="video/mp4" />
-          </video>
-        </div>
+        <video muted preload="none" poster="" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;">
+          <source src="https://files.catbox.moe/g8fhyh.mp4" type="video/mp4" />
+        </video>
+        <div class="video-title">The Succubus Act 3</div>
       </a>
-      <div class="video-title">The Succubus Act 3</div>
-      <div class="video-meta">Leana Lovings, Rikako Katayama</div>
-      <div class="video-meta">Duration: 34:22 | Posted: June 27, 2025</div>
-      <div class="tags">Asian, Creampie, Lesbian, Tentacles</div>
     </div>
 
-    <!-- ACT 2 -->
     <div class="video-card">
       <a href="the-succubus-act-2.html">
-        <div class="video-preview">
-          <video muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime = 0;">
-            <source src="https://files.catbox.moe/xtt9xk.mp4" type="video/mp4" />
-          </video>
-        </div>
+        <video muted preload="none" poster="" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;">
+          <source src="https://files.catbox.moe/xtt9xk.mp4" type="video/mp4" />
+        </video>
+        <div class="video-title">The Succubus Act 2</div>
       </a>
-      <div class="video-title">The Succubus Act 2</div>
-      <div class="video-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
-      <div class="video-meta">Duration: 27:07 | Posted: June 13, 2025</div>
-      <div class="tags">Bukkake, Creampie, Lesbian, Tentacles, Vore</div>
     </div>
 
-    <!-- ACT 1 -->
     <div class="video-card">
       <a href="the-succubus-act-1.html">
-        <div class="video-preview">
-          <video muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime = 0;">
-            <source src="https://files.catbox.moe/25v1uz.mp4" type="video/mp4" />
-          </video>
-        </div>
+        <video muted preload="none" poster="" onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;">
+          <source src="https://files.catbox.moe/25v1uz.mp4" type="video/mp4" />
+        </video>
+        <div class="video-title">The Succubus Act 1</div>
       </a>
-      <div class="video-title">The Succubus Act 1</div>
-      <div class="video-meta">Leana Lovings, Rikako Katayama, Tiffany Tatum</div>
-      <div class="video-meta">Duration: 29:22 | Posted: May 30, 2025</div>
-      <div class="tags">Bukkake, Creampie, Teen, Tentacles</div>
     </div>
   </section>
 
