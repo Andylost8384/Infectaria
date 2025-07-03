@@ -29,8 +29,8 @@
       position: relative;
       width: 100%;
       height: 80vh;
-      overflow: hidden;
       background-color: black;
+      overflow: hidden;
     }
 
     .hero video {
@@ -77,12 +77,13 @@
       display: flex;
       justify-content: space-around;
       padding: 20px;
-      background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+      background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
     }
 
     .stats div {
       text-align: center;
       font-weight: bold;
+      background: none;
     }
 
     .stats span {
@@ -99,8 +100,7 @@
     .video-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding: 0 0 40px 0;
+      gap: 0px;
     }
 
     .video-card {
@@ -110,6 +110,7 @@
 
     .video-card video {
       width: 100%;
+      height: auto;
       display: block;
     }
 
@@ -117,10 +118,10 @@
       position: absolute;
       bottom: 10px;
       left: 10px;
-      background: none;
       color: white;
       font-weight: bold;
       font-size: 16px;
+      background: none;
       pointer-events: none;
     }
 
@@ -135,13 +136,14 @@
   </header>
 
   <div class="hero">
-    <!-- Home page video placeholder -->
-    <video autoplay muted loop playsinline></video>
-    <div class="hero-content">
-      <h2>BEST REAL LIFE <span>HENTAI</span></h2>
-      <p>Your top source for premium tentacle and alien pornography.</p>
-      <a class="button" href="https://t.me/AsiaModelMedia">JOIN NOW</a>
-    </div>
+    <!-- Leave this space empty for now -->
+    <!-- Add video link later -->
+  </div>
+
+  <div class="hero-content">
+    <h2>BEST REAL LIFE <span>HENTAI</span></h2>
+    <p>Your top source for premium tentacle and alien pornography.</p>
+    <a class="button" href="https://t.me/AsiaModelMedia">JOIN NOW</a>
   </div>
 
   <div class="stats">
@@ -154,18 +156,22 @@
 
   <div class="video-grid">
     <div class="video-card">
-      <video src="videos/succubus3.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+      <video src="videos/succubus3.mp4" muted preload="metadata"
+        onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
       <div class="video-title">The Succubus Act 3</div>
     </div>
+
     <div class="video-card">
-      <video src="videos/succubus2.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+      <video src="videos/succubus2.mp4" muted preload="metadata"
+        onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
       <div class="video-title">The Succubus Act 2</div>
     </div>
+
     <div class="video-card">
-      <video src="videos/succubus1.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+      <video src="videos/succubus1.mp4" muted preload="metadata"
+        onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
       <div class="video-title">The Succubus Act 1</div>
     </div>
   </div>
 </body>
 </html>
-
