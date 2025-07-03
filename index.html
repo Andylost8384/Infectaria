@@ -33,12 +33,6 @@
       overflow: hidden;
     }
 
-    .hero video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
     .hero-content {
       position: absolute;
       top: 30%;
@@ -128,6 +122,11 @@
     .video-card video:hover {
       filter: brightness(1.1);
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
   </style>
 </head>
 <body>
@@ -136,7 +135,7 @@
   </header>
 
   <div class="hero">
-    <!-- Preview video placeholder - leave empty for now -->
+    <!-- Leave empty, you will add preview video here later -->
   </div>
 
   <div class="hero-content">
@@ -154,20 +153,26 @@
   <div class="section-title">NEW SCENES</div>
 
   <div class="video-grid">
-    <div class="video-card">
-      <video src="https://files.catbox.moe/g8fhyh.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
-      <div class="video-title">The Succubus Act 3</div>
-    </div>
+    <a href="the-succubus-act-3.html">
+      <div class="video-card">
+        <video src="https://files.catbox.moe/g8fhyh.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+        <div class="video-title">The Succubus Act 3</div>
+      </div>
+    </a>
 
-    <div class="video-card">
-      <video src="https://files.catbox.moe/xtt9xk.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
-      <div class="video-title">The Succubus Act 2</div>
-    </div>
+    <a href="the-succubus-act-2.html">
+      <div class="video-card">
+        <video src="https://files.catbox.moe/xtt9xk.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+        <div class="video-title">The Succubus Act 2</div>
+      </div>
+    </a>
 
-    <div class="video-card">
-      <video src="https://files.catbox.moe/25v1uz.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
-      <div class="video-title">The Succubus Act 1</div>
-    </div>
+    <a href="the-succubus-act-1.html">
+      <div class="video-card">
+        <video src="https://files.catbox.moe/25v1uz.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+        <div class="video-title">The Succubus Act 1</div>
+      </div>
+    </a>
   </div>
 </body>
 </html>
