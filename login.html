@@ -1,109 +1,80 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Infectaria</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
   <style>
     body {
-      margin: 0;
-      background-color: #0e0e0e;
       font-family: Arial, sans-serif;
+      background-color: #0e0e0e;
       color: white;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
-
-    .login-container {
+    .container {
       background: #1a1a1a;
-      padding: 40px;
+      padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 0, 100, 0.2);
-      width: 100%;
-      max-width: 400px;
+      width: 300px;
     }
-
     h2 {
       text-align: center;
-      margin-bottom: 30px;
       color: #f43672;
     }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #ddd;
-    }
-
-    .form-group input {
+    input[type="email"], input[type="password"] {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
+      margin: 10px 0;
       border: none;
-      border-radius: 6px;
-      background: #2a2a2a;
-      color: white;
-      font-size: 14px;
+      border-radius: 5px;
     }
-
-    .login-button {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(to right, #f43672, #8b2cf5);
-      border: none;
-      border-radius: 6px;
+    .button {
+      background-color: #f43672;
       color: white;
-      font-size: 16px;
-      font-weight: bold;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
+      font-weight: bold;
     }
-
-    a {
-      display: block;
+    .button:hover {
+      background-color: #e22d66;
+    }
+    .links {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 15px;
+    }
+    .links a {
       color: #f43672;
       text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
+  <div class="container">
     <h2>Login</h2>
     <form id="loginForm">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" required>
-      </div>
-      <button class="login-button" type="submit">Login</button>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit" class="button">Login</button>
     </form>
-    <a href="signup.html">Don't have an account? Sign Up</a>
-    <a href="forgot.html">Forgot Password?</a>
+    <div class="links">
+      <p><a href="signup.html">Don't have an account? Sign Up</a></p>
+      <p><a href="forgot-password.html">Forgot Password?</a></p>
+    </div>
   </div>
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      if (username === "admin" && password === "infectaria123") {
-        localStorage.setItem("authenticated", true);
-        window.location.href = "protected.html";
-      } else {
-        alert("Invalid login credentials");
-      }
+      const email = document.getElementById('email').value;
+      localStorage.setItem('infectaria_user_email', email);
+      window.location.href = 'plans.html';
     });
   </script>
 </body>
