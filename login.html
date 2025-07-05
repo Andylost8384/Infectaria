@@ -1,3 +1,4 @@
+<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +26,7 @@
       max-width: 400px;
     }
 
-    .login-container h2 {
+    h2 {
       text-align: center;
       margin-bottom: 30px;
       color: #f43672;
@@ -52,11 +53,6 @@
       font-size: 14px;
     }
 
-    .form-group input:focus {
-      outline: none;
-      background: #333;
-    }
-
     .login-button {
       width: 100%;
       padding: 12px;
@@ -67,17 +63,12 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
     }
 
-    .login-button:hover {
-      opacity: 0.9;
-    }
-
-    .back-link {
-      margin-top: 20px;
-      text-align: center;
+    a {
       display: block;
+      text-align: center;
+      margin-top: 10px;
       color: #f43672;
       text-decoration: none;
     }
@@ -86,18 +77,34 @@
 <body>
   <div class="login-container">
     <h2>Login</h2>
-    <form>
+    <form id="loginForm">
       <div class="form-group">
-        <label for="username">Username or Email</label>
-        <input type="text" id="username" placeholder="Enter your email or username" required>
+        <label for="username">Username</label>
+        <input type="text" id="username" required>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
+        <input type="password" id="password" required>
       </div>
       <button class="login-button" type="submit">Login</button>
     </form>
-    <a href="index.html" class="back-link">← Back to Home</a>
+    <a href="signup.html">Don't have an account? Sign Up</a>
+    <a href="forgot.html">Forgot Password?</a>
   </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === "admin" && password === "infectaria123") {
+        localStorage.setItem("authenticated", true);
+        window.location.href = "protected.html";
+      } else {
+        alert("Invalid login credentials");
+      }
+    });
+  </script>
 </body>
 </html>
