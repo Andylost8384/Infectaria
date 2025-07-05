@@ -1,18 +1,58 @@
-<!-- protected.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Protected Area</title>
-  <script>
-    if (!localStorage.getItem("authenticated")) {
-      window.location.href = "login.html";
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Premium Content</title>
+  <style>
+    body {
+      background: #0e0e0e;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 40px;
     }
-  </script>
+    .premium {
+      display: none;
+    }
+    .login-warning {
+      color: #f43672;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h1 style="color:white;text-align:center;margin-top:50px;">Welcome to the Private Section</h1>
+  <h1>Welcome to Premium Content</h1>
+  <div class="premium">
+    <p>This is your exclusive premium content section. Enjoy your videos!</p>
+    <video src="videos/premium-video.mp4" controls width="100%"></video>
+  </div>
+  <div class="login-warning" id="warning">Please log in to view this content.</div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBDHMczYxUSXcoZuQRYh-wsDu4W_FuuukI",
+      authDomain: "infectaria-3cacf.firebaseapp.com",
+      projectId: "infectaria-3cacf",
+      storageBucket: "infectaria-3cacf.appspot.com",
+      messagingSenderId: "323281294881",
+      appId: "1:323281294881:web:b339985000dec8b9bc3560"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        document.querySelector('.premium').style.display = 'block';
+        document.getElementById('warning').style.display = 'none';
+      } else {
+        document.querySelector('.premium').style.display = 'none';
+        document.getElementById('warning').style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
-
