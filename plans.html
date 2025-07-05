@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose Your Plan - Infectaria</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #02010b;
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      color: #18e0e0;
+      margin-top: 30px;
+    }
+
+    .plans-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 40px auto;
+      gap: 20px;
+    }
+
+    .plan {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 30px 20px;
+      width: 280px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .plan h2 {
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .price {
+      font-size: 32px;
+      margin: 10px 0;
+      color: #33ffd6;
+    }
+
+    .usd {
+      font-size: 18px;
+      color: #bbb;
+    }
+
+    .note {
+      margin: 10px 0;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .choose-btn {
+      margin-top: 15px;
+      background: linear-gradient(to right, #ff4a9d, #c730f4);
+      border: none;
+      padding: 12px 20px;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .payment-methods {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .qr {
+      margin-top: 20px;
+      max-width: 200px;
+    }
+
+    .upi, .binance {
+      margin-top: 10px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Choose Your Plan</h1>
+
+  <div class="plans-container">
+    <div class="plan">
+      <h2>1 Month</h2>
+      <div class="price">₹69 <span class="usd">/ $0.81</span></div>
+      <div class="note">Streaming Only</div>
+      <button class="choose-btn" onclick="showPayments()">Choose this plan</button>
+    </div>
+    <div class="plan">
+      <h2>3 Months</h2>
+      <div class="price">₹190 <span class="usd">/ $2.22</span></div>
+      <div class="note">Streaming Only</div>
+      <button class="choose-btn" onclick="showPayments()">Choose this plan</button>
+    </div>
+    <div class="plan">
+      <h2>6 Months</h2>
+      <div class="price">₹350 <span class="usd">/ $4.09</span></div>
+      <div class="note">Streaming Only</div>
+      <button class="choose-btn" onclick="showPayments()">Choose this plan</button>
+    </div>
+  </div>
+
+  <div class="payment-methods" id="payment">
+    <h2>Payment Methods</h2>
+    <div class="upi">
+      <strong>UPI (India):</strong><br>
+      Paytm, GPay, PhonePe<br>
+      <em>UPI ID:</em> <code>your-upi@okaxis</code>
+    </div>
+    <div class="qr">
+      <img src="images/qr.png" alt="QR Code" class="qr" />
+    </div>
+    <div class="binance">
+      <strong>International (Binance Pay):</strong><br>
+      USDT (TRC20 Network)<br>
+      <em>Binance Pay ID:</em> <code>your-binance-id</code>
+    </div>
+  </div>
+
+  <script>
+    function showPayments() {
+      document.getElementById("payment").style.display = "block";
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
