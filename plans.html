@@ -1,186 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Choose a Plan</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plans - Infectaria</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0f1624;
+      background-color: #0e0e0e;
       color: white;
     }
-
     .container {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      padding: 50px 20px;
-    }
-
-    .plan {
-      background-color: #1a2332;
-      border: 1px solid #3c4f6e;
-      border-radius: 10px;
-      padding: 30px;
-      width: 220px;
+      padding: 40px;
       text-align: center;
     }
-
-    .plan h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
+    h1 {
+      color: #f43672;
     }
-
-    .plan .price {
-      font-size: 34px;
-      color: #2a8df4;
-      margin: 20px 0;
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
     }
-
-    .plan button {
-      padding: 10px 20px;
-      border: 1px solid #2a8df4;
-      background: none;
-      color: #2a8df4;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .modal, .payment-summary {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #182033;
+    .plan {
+      background-color: #1a1a1a;
       padding: 30px;
       border-radius: 10px;
-      z-index: 9999;
+      border: 2px solid #f43672;
+    }
+    .plan h2 {
+      color: #f43672;
+    }
+    .plan p {
+      margin: 10px 0;
+    }
+    .plan button {
+      background: #f43672;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #paymentModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #222;
+      padding: 30px;
+      border-radius: 10px;
       width: 90%;
       max-width: 500px;
     }
-
-    .modal h3, .payment-summary h3 {
-      margin-top: 0;
+    .payment-method {
+      margin-top: 20px;
     }
-
-    .modal ul {
-      list-style: none;
-      padding: 0;
+    .payment-method img {
+      width: 100%;
+      border-radius: 10px;
     }
-
-    .modal ul li {
-      padding: 10px;
-      border-bottom: 1px solid #3c4f6e;
-      cursor: pointer;
+    .contact {
+      margin-top: 20px;
+      font-size: 14px;
     }
-
-    .qr {
-      text-align: center;
-    }
-
-    .qr img {
-      max-width: 200px;
-    }
-
-    .close {
-      text-align: right;
-      cursor: pointer;
-      font-weight: bold;
-      margin-top: -20px;
-      margin-right: -20px;
+    .contact a {
+      color: #f43672;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-
-<div class="container">
-  <div class="plan">
-    <h2>1 Month</h2>
-    <div class="price">₹69<br><span style="font-size:14px; color:#aaa;">($0.81)</span></div>
-    <button onclick="startPurchase('1 Month')">Purchase</button>
+  <div class="container">
+    <h1>Choose a Plan</h1>
+    <div class="plan-grid">
+      <div class="plan">
+        <h2>1 Month</h2>
+        <p>₹69 / $0.81</p>
+        <p>Streaming Only</p>
+        <button onclick="selectPlan('1 Month')">Purchase</button>
+      </div>
+      <div class="plan">
+        <h2>3 Month</h2>
+        <p>₹190 / $2.22</p>
+        <p>Streaming Only</p>
+        <button onclick="selectPlan('3 Month')">Purchase</button>
+      </div>
+      <div class="plan">
+        <h2>6 Month</h2>
+        <p>₹350 / $4.09</p>
+        <p>Streaming Only</p>
+        <button onclick="selectPlan('6 Month')">Purchase</button>
+      </div>
+    </div>
   </div>
-  <div class="plan">
-    <h2>3 Months</h2>
-    <div class="price">₹190<br><span style="font-size:14px; color:#aaa;">($2.22)</span></div>
-    <button onclick="startPurchase('3 Months')">Purchase</button>
+
+  <div id="paymentModal">
+    <div class="modal-content">
+      <h2 id="selectedPlan">Payment</h2>
+      <div class="payment-method">
+        <h3>For Indian Users (UPI)</h3>
+        <img src="https://i.postimg.cc/FRMdBhRv/photo-2025-07-05-20-35-49.jpg" alt="UPI QR" />
+        <p>UPI ID: paytminfectaria@ybl</p>
+      </div>
+      <div class="payment-method">
+        <h3>For International (Binance Pay)</h3>
+        <img src="https://i.postimg.cc/28KRR3Yn/photo-2025-06-22-18-14-29.jpg" alt="Binance QR" />
+        <p>Binance Pay ID: 298217199</p>
+      </div>
+      <div class="contact">
+        <p>Contact us after payment:</p>
+        <p><a href="https://t.me/AsiaModelMedia">Telegram</a> | <a href="https://wa.me/918989898989">WhatsApp</a></p>
+      </div>
+    </div>
   </div>
-  <div class="plan">
-    <h2>6 Months</h2>
-    <div class="price">₹350<br><span style="font-size:14px; color:#aaa;">($4.09)</span></div>
-    <button onclick="startPurchase('6 Months')">Purchase</button>
-  </div>
-</div>
 
-<div id="paymentModal" class="modal">
-  <div class="close" onclick="closeModal()">✖</div>
-  <h3>Please choose payment method</h3>
-  <ul>
-    <li onclick="showSummary('UPI')">UPI / QR</li>
-    <li onclick="showSummary('Binance')">Binance Pay</li>
-  </ul>
-</div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-<div id="summaryModal" class="payment-summary">
-  <div class="close" onclick="closeSummary()">✖</div>
-  <h3>Payment Summary</h3>
-  <div class="qr" id="qrDetails"></div>
-</div>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBDHMczYxUSXcoZuQRYh-wsDu4W_FuuukI",
+      authDomain: "infectaria-3cacf.firebaseapp.com",
+      projectId: "infectaria-3cacf",
+      storageBucket: "infectaria-3cacf.appspot.com",
+      messagingSenderId: "323281294881",
+      appId: "1:323281294881:web:b339985000dec8b9bc3560"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-<script>
-  let selectedPlan = '';
-  let loggedIn = false; // simulate login status
-
-  function startPurchase(plan) {
-    selectedPlan = plan;
-    if (!loggedIn) {
-      alert('Please sign in or sign up before purchasing.');
-      window.location.href = 'login.html';
-      return;
+    function selectPlan(plan) {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          document.getElementById("selectedPlan").textContent = `Pay for ${plan}`;
+          document.getElementById("paymentModal").style.display = "flex";
+        } else {
+          alert("Please log in or sign up first.");
+          window.location.href = "login.html";
+        }
+      });
     }
-    document.getElementById('paymentModal').style.display = 'block';
-  }
-
-  function showSummary(method) {
-    const qrDiv = document.getElementById('qrDetails');
-    let qrHTML = '';
-
-    if (method === 'UPI') {
-      qrHTML = `
-        <p><strong>Method:</strong> UPI / QR</p>
-        <p><strong>Plan:</strong> ${selectedPlan}</p>
-        <img src="https://i.postimg.cc/FRMdBhRv/photo-2025-07-05-20-35-49.jpg" alt="UPI QR">
-        <p>Send UPI payment and <strong>contact us after payment</strong>:</p>
-        <p>📱 Telegram: @YourUsername</p>
-        <p>📞 WhatsApp: +91-XXXXXXXXXX</p>
-      `;
-    } else {
-      qrHTML = `
-        <p><strong>Method:</strong> Binance Pay (USDT - TRC20)</p>
-        <p><strong>Plan:</strong> ${selectedPlan}</p>
-        <img src="https://i.postimg.cc/28KRR3Yn/photo-2025-06-22-18-14-29.jpg" alt="Binance QR">
-        <p>Send payment and <strong>contact us after payment</strong>:</p>
-        <p>📱 Telegram: @YourUsername</p>
-        <p>📞 WhatsApp: +91-XXXXXXXXXX</p>
-      `;
-    }
-
-    qrDiv.innerHTML = qrHTML;
-    document.getElementById('paymentModal').style.display = 'none';
-    document.getElementById('summaryModal').style.display = 'block';
-  }
-
-  function closeModal() {
-    document.getElementById('paymentModal').style.display = 'none';
-  }
-
-  function closeSummary() {
-    document.getElementById('summaryModal').style.display = 'none';
-  }
-</script>
-
+  </script>
 </body>
 </html>
