@@ -2,128 +2,154 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plans - Infectaria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Choose a Plan</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
       background-color: #0e0e0e;
       color: white;
+      margin: 0;
+      padding: 20px;
     }
-    .container {
-      padding: 40px;
-      text-align: center;
-    }
+
     h1 {
+      text-align: center;
       color: #f43672;
     }
-    .plan-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    .plans {
+      display: flex;
+      justify-content: center;
       gap: 20px;
-      margin-top: 40px;
+      flex-wrap: wrap;
     }
+
     .plan {
-      background-color: #1a1a1a;
-      padding: 30px;
+      background-color: #1c1c1c;
+      padding: 20px;
       border-radius: 10px;
+      text-align: center;
+      width: 250px;
       border: 2px solid #f43672;
     }
+
     .plan h2 {
-      color: #f43672;
+      margin-top: 0;
     }
-    .plan p {
-      margin: 10px 0;
-    }
+
     .plan button {
-      background: #f43672;
+      margin-top: 15px;
+      background-color: #f43672;
       color: white;
       border: none;
       padding: 10px 20px;
-      border-radius: 6px;
+      border-radius: 5px;
       cursor: pointer;
     }
-    #paymentModal {
+
+    /* Floating modal */
+    .modal {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background-color: #222;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1c1c1c;
       padding: 30px;
       border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
+      z-index: 1000;
+      border: 2px solid #f43672;
+      width: 300px;
     }
-    .payment-method {
-      margin-top: 20px;
-    }
-    .payment-method img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .contact {
-      margin-top: 20px;
-      font-size: 14px;
-    }
-    .contact a {
+
+    .modal h3 {
       color: #f43672;
-      text-decoration: none;
+    }
+
+    .modal .payment-option {
+      margin-top: 15px;
+    }
+
+    .modal .qr {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .modal .contact {
+      margin-top: 15px;
+    }
+
+    .modal .close {
+      margin-top: 20px;
+      background: #f43672;
+      border: none;
+      color: white;
+      padding: 8px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Choose a Plan</h1>
-    <div class="plan-grid">
-      <div class="plan">
-        <h2>1 Month</h2>
-        <p>₹69 / $0.81</p>
-        <p>Streaming Only</p>
-        <button onclick="selectPlan('1 Month')">Purchase</button>
-      </div>
-      <div class="plan">
-        <h2>3 Month</h2>
-        <p>₹190 / $2.22</p>
-        <p>Streaming Only</p>
-        <button onclick="selectPlan('3 Month')">Purchase</button>
-      </div>
-      <div class="plan">
-        <h2>6 Month</h2>
-        <p>₹350 / $4.09</p>
-        <p>Streaming Only</p>
-        <button onclick="selectPlan('6 Month')">Purchase</button>
-      </div>
+  <h1>Select Your Plan</h1>
+
+  <div class="plans">
+    <div class="plan">
+      <h2>1 Month</h2>
+      <p>₹69 / $0.81</p>
+      <p>Streaming Only</p>
+      <button class="purchase-btn" data-plan="1-month">Purchase</button>
+    </div>
+    <div class="plan">
+      <h2>3 Months</h2>
+      <p>₹190 / $2.22</p>
+      <p>Streaming Only</p>
+      <button class="purchase-btn" data-plan="3-month">Purchase</button>
+    </div>
+    <div class="plan">
+      <h2>6 Months</h2>
+      <p>₹350 / $4.09</p>
+      <p>Streaming Only</p>
+      <button class="purchase-btn" data-plan="6-month">Purchase</button>
     </div>
   </div>
 
-  <div id="paymentModal">
-    <div class="modal-content">
-      <h2 id="selectedPlan">Payment</h2>
-      <div class="payment-method">
-        <h3>For Indian Users (UPI)</h3>
-        <img src="https://i.postimg.cc/FRMdBhRv/photo-2025-07-05-20-35-49.jpg" alt="UPI QR" />
-        <p>UPI ID: paytminfectaria@ybl</p>
-      </div>
-      <div class="payment-method">
-        <h3>For International (Binance Pay)</h3>
-        <img src="https://i.postimg.cc/28KRR3Yn/photo-2025-06-22-18-14-29.jpg" alt="Binance QR" />
-        <p>Binance Pay ID: 298217199</p>
-      </div>
-      <div class="contact">
-        <p>Contact us after payment:</p>
-        <p><a href="https://t.me/AsiaModelMedia">Telegram</a> | <a href="https://wa.me/918989898989">WhatsApp</a></p>
-      </div>
+  <!-- Floating Modal -->
+  <div class="overlay" id="overlay"></div>
+  <div class="modal" id="paymentModal">
+    <h3>Payment Methods</h3>
+
+    <div class="payment-option">
+      <strong>Indian UPI (Paytm, GPay, PhonePe):</strong>
+      <img src="https://i.postimg.cc/FRMdBhRv/photo-2025-07-05-20-35-49.jpg" alt="UPI QR" class="qr">
+      <p>UPI ID: yourupi@okaxis</p>
     </div>
+
+    <div class="payment-option">
+      <strong>International (Binance Pay):</strong>
+      <img src="https://i.postimg.cc/28KRR3Yn/photo-2025-06-22-18-14-29.jpg" alt="Binance QR" class="qr">
+      <p>Network: TRC20<br>Wallet: yourusdtaddress</p>
+    </div>
+
+    <div class="contact">
+      Contact us after payment:<br>
+      <a href="https://t.me/AsiaModelMedia" style="color: #f43672;">Telegram</a> or WhatsApp: +91-XXXXXXX
+    </div>
+
+    <button class="close" id="closeModal">Close</button>
   </div>
 
+  <!-- Firebase Setup -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
@@ -136,20 +162,33 @@
       messagingSenderId: "323281294881",
       appId: "1:323281294881:web:b339985000dec8b9bc3560"
     };
+
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    function selectPlan(plan) {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          document.getElementById("selectedPlan").textContent = `Pay for ${plan}`;
-          document.getElementById("paymentModal").style.display = "flex";
-        } else {
-          alert("Please log in or sign up first.");
-          window.location.href = "login.html";
-        }
+    const buttons = document.querySelectorAll('.purchase-btn');
+    const modal = document.getElementById('paymentModal');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('closeModal');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+          } else {
+            alert("Please log in first to purchase a plan.");
+            window.location.href = "login.html";
+          }
+        });
       });
-    }
+    });
+
+    closeBtn.onclick = () => {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+    };
   </script>
 </body>
 </html>
