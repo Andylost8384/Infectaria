@@ -17,6 +17,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px;
+      background-color: #111;
     }
 
     header h1 {
@@ -25,12 +26,39 @@
       margin: 0;
     }
 
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .auth-buttons a {
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .login-btn {
+      background-color: #382728;
+      color: white;
+    }
+
+    .join-btn {
+      background-color: #f1a6b8;
+      color: #000;
+    }
+
     .hero {
       position: relative;
       width: 100%;
       height: 80vh;
-      background-color: black;
       overflow: hidden;
+    }
+
+    .hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .hero-content {
@@ -71,13 +99,12 @@
       display: flex;
       justify-content: space-around;
       padding: 20px;
-      background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+      background-color: #000;
     }
 
     .stats div {
       text-align: center;
       font-weight: bold;
-      background: none;
     }
 
     .stats span {
@@ -85,16 +112,22 @@
     }
 
     .section-title {
-      margin: 30px 0 10px 30px;
+      background: linear-gradient(to right, red, darkred);
+      padding: 12px 25px;
       font-size: 18px;
       font-weight: bold;
       color: white;
+      display: inline-block;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      margin-bottom: 20px;
     }
 
     .video-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0px;
+      gap: 10px;
+      padding: 0 0 40px 0;
     }
 
     .video-card {
@@ -104,7 +137,6 @@
 
     .video-card video {
       width: 100%;
-      height: auto;
       display: block;
     }
 
@@ -112,10 +144,10 @@
       position: absolute;
       bottom: 10px;
       left: 10px;
+      background: none;
       color: white;
       font-weight: bold;
       font-size: 16px;
-      background: none;
       pointer-events: none;
     }
 
@@ -123,19 +155,33 @@
       filter: brightness(1.1);
     }
 
-    a {
+    .view-all {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .view-all a {
+      padding: 10px 30px;
+      background-color: #f1a6b8;
+      color: #000;
+      font-weight: bold;
+      border-radius: 6px;
       text-decoration: none;
-      color: inherit;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Infectaria</h1>
+    <div class="auth-buttons">
+      <a class="login-btn" href="login.html">LOGIN</a>
+      <a class="join-btn" href="https://t.me/AsiaModelMedia">JOIN NOW</a>
+    </div>
   </header>
 
   <div class="hero">
-    <!-- Leave empty, you will add preview video here later -->
+    <!-- leave preview video blank for now -->
   </div>
 
   <div class="hero-content">
@@ -150,29 +196,31 @@
     <div><span>REAL</span> ACTRESSES</div>
   </div>
 
-  <div class="section-title">NEW SCENES</div>
+  <div class="section-title">NEW SCENES ⭐</div>
 
   <div class="video-grid">
-    <a href="the-succubus-act-3.html">
-      <div class="video-card">
-        <video src="https://files.catbox.moe/g8fhyh.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+    <div class="video-card">
+      <a href="the-succubus-act-3.html">
+        <video src="videos/succubus3.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
         <div class="video-title">The Succubus Act 3</div>
-      </div>
-    </a>
-
-    <a href="the-succubus-act-2.html">
-      <div class="video-card">
-        <video src="https://files.catbox.moe/xtt9xk.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+      </a>
+    </div>
+    <div class="video-card">
+      <a href="the-succubus-act-2.html">
+        <video src="videos/succubus2.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
         <div class="video-title">The Succubus Act 2</div>
-      </div>
-    </a>
-
-    <a href="the-succubus-act-1.html">
-      <div class="video-card">
-        <video src="https://files.catbox.moe/25v1uz.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+      </a>
+    </div>
+    <div class="video-card">
+      <a href="the-succubus-act-1.html">
+        <video src="videos/succubus1.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
         <div class="video-title">The Succubus Act 1</div>
-      </div>
-    </a>
+      </a>
+    </div>
+  </div>
+
+  <div class="view-all">
+    <a href="all-videos.html">VIEW ALL VIDEOS</a>
   </div>
 </body>
 </html>
