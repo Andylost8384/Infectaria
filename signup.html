@@ -2,89 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign Up</title>
-  <style>
-    body {
-      background: #0e0e0e;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .form-container {
-      background: #1a1a1a;
-      padding: 30px;
-      border-radius: 10px;
-      width: 300px;
-    }
-    h2 {
-      text-align: center;
-      color: #f43672;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 5px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(to right, #f43672, #8b2cf5);
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-weight: bold;
-      margin-top: 20px;
-      cursor: pointer;
-    }
-    .link {
-      text-align: center;
-      margin-top: 15px;
-    }
-    .link a {
-      color: #f43672;
-      text-decoration: none;
-    }
-  </style>
-</head>
-<body>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-  <div class="form-container">
-    <h2>Create Account</h2>
-    <input type="text" id="username" placeholder="Username" required />
-    <input type="email" id="email" placeholder="Email" required />
-    <input type="password" id="password" placeholder="Password" required />
-    <button onclick="signUp()">Create Account</button>
-    <div class="link">
-      <a href="login.html">Already have an account? Login</a>
-    </div>
-  </div>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBDHMczYxUSXcoZuQRYh-wsDu4W_FuuukI",
+      authDomain: "infectaria-3cacf.firebaseapp.com",
+      projectId: "infectaria-3cacf",
+      storageBucket: "infectaria-3cacf.firebasestorage.app",
+      messagingSenderId: "323281294881",
+      appId: "1:323281294881:web:b339985000dec8b9bc3560"
+    };
 
-  <script>
-    function signUp() {
-      const username = document.getElementById("username").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
 
-      if (!username || !email || !password) {
-        alert("Please fill in all fields.");
-        return;
-      }
-
-      // Save user data
-      localStorage.setItem("userUsername", username);
-      localStorage.setItem("userEmail", email);
-      localStorage.setItem("userPassword", password);
-
-      alert("Account created successfully!");
-      window.location.href = "login.html";
+    window.signup = () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          alert("Account created. Please login.");
+          window.location.href = "login.html";
+        })
+        .catch((error) => alert(error.message));
     }
   </script>
+</head>
+<body>
+  <h2>Sign Up</h2>
+  <input type="email" id="email" placeholder="Email" /><br />
+  <input type="password" id="password" placeholder="Password" /><br />
+  <button onclick="signup()">Create Account</button>
 </body>
 </html>
