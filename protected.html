@@ -3,31 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Premium Content</title>
+  <title>Protected Content</title>
   <style>
     body {
       background: #0e0e0e;
       color: white;
       font-family: Arial, sans-serif;
       padding: 40px;
-    }
-    .premium {
-      display: none;
-    }
-    .login-warning {
-      color: #f43672;
-      font-weight: bold;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to Premium Content</h1>
-  <div class="premium">
-    <p>This is your exclusive premium content section. Enjoy your videos!</p>
-    <video src="videos/premium-video.mp4" controls width="100%"></video>
-  </div>
-  <div class="login-warning" id="warning">Please log in to view this content.</div>
-
+  <h1>Protected Premium Content</h1>
+  <p id="content" style="display: none;">Welcome! You are logged in and can view this exclusive content.</p>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
@@ -44,13 +33,14 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
+    const content = document.getElementById("content");
+
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        document.querySelector('.premium').style.display = 'block';
-        document.getElementById('warning').style.display = 'none';
+        content.style.display = "block";
       } else {
-        document.querySelector('.premium').style.display = 'none';
-        document.getElementById('warning').style.display = 'block';
+        alert("You must be logged in to view this content.");
+        window.location.href = "login.html";
       }
     });
   </script>
