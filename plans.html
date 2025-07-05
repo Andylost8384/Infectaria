@@ -3,132 +3,176 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Choose Your Plan - Infectaria</title>
+  <title>Choose Plan - Infectaria</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #02010b;
+      background: #0e0e0e;
       color: #fff;
-      text-align: center;
+      margin: 0;
+      padding: 20px;
     }
-
     h1 {
-      color: #18e0e0;
-      margin-top: 30px;
+      text-align: center;
+      margin-bottom: 40px;
     }
-
-    .plans-container {
+    .plans {
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      margin: 40px auto;
       gap: 20px;
+      flex-wrap: wrap;
     }
-
-    .plan {
-      background: #111;
-      border: 1px solid #333;
-      border-radius: 12px;
-      padding: 30px 20px;
-      width: 280px;
-      box-shadow: 0 0 10px #000;
+    .plan-card {
+      background: #1a1a2e;
+      border: 1px solid #2c3e50;
+      border-radius: 8px;
+      padding: 20px;
+      width: 200px;
+      text-align: center;
     }
-
-    .plan h2 {
-      margin-bottom: 10px;
-      color: #fff;
+    .plan-card h2 {
+      margin: 10px 0;
+      font-size: 22px;
     }
-
     .price {
-      font-size: 32px;
-      margin: 10px 0;
-      color: #33ffd6;
+      font-size: 28px;
+      color: #3498db;
     }
-
-    .usd {
-      font-size: 18px;
-      color: #bbb;
-    }
-
-    .note {
-      margin: 10px 0;
-      font-size: 14px;
-      color: #ccc;
-    }
-
-    .choose-btn {
-      margin-top: 15px;
-      background: linear-gradient(to right, #ff4a9d, #c730f4);
-      border: none;
-      padding: 12px 20px;
-      color: white;
-      font-size: 16px;
-      border-radius: 6px;
+    .purchase-btn {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background: transparent;
+      border: 1px solid #3498db;
+      color: #3498db;
+      border-radius: 5px;
       cursor: pointer;
     }
-
-    .payment-methods {
+    .purchase-btn:hover {
+      background: #3498db;
+      color: white;
+    }
+    /* Modal */
+    .modal {
       display: none;
-      margin-top: 30px;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
     }
-
-    .qr {
+    .modal-content {
+      background: #1a1a2e;
+      padding: 30px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 600px;
+    }
+    .payment-methods button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 12px;
+      background: #2c3e50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: left;
+    }
+    .payment-summary {
+      display: none;
       margin-top: 20px;
-      max-width: 200px;
+      background: #111;
+      padding: 20px;
+      border-radius: 6px;
+      color: #ccc;
     }
-
-    .upi, .binance {
-      margin-top: 10px;
-      font-size: 15px;
+    .qr {
+      text-align: center;
+      margin: 15px 0;
+    }
+    .contact-us {
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+    }
+    .close-btn {
+      float: right;
+      color: red;
+      cursor: pointer;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>Choose Your Plan</h1>
-
-  <div class="plans-container">
-    <div class="plan">
+  <h1>Select Your Plan</h1>
+  <div class="plans">
+    <div class="plan-card">
       <h2>1 Month</h2>
-      <div class="price">₹69 <span class="usd">/ $0.81</span></div>
-      <div class="note">Streaming Only</div>
-      <button class="choose-btn" onclick="showPayments()">Choose this plan</button>
+      <div class="price">
+        ₹69 <br /> $0.81
+      </div>
+      <button class="purchase-btn" onclick="openModal('1 Month')">Purchase</button>
     </div>
-    <div class="plan">
+    <div class="plan-card">
       <h2>3 Months</h2>
-      <div class="price">₹190 <span class="usd">/ $2.22</span></div>
-      <div class="note">Streaming Only</div>
-      <button class="choose-btn" onclick="showPayments()">Choose this plan</button>
+      <div class="price">
+        ₹190 <br /> $2.22
+      </div>
+      <button class="purchase-btn" onclick="openModal('3 Months')">Purchase</button>
     </div>
-    <div class="plan">
+    <div class="plan-card">
       <h2>6 Months</h2>
-      <div class="price">₹350 <span class="usd">/ $4.09</span></div>
-      <div class="note">Streaming Only</div>
-      <button class="choose-btn" onclick="showPayments()">Choose this plan</button>
+      <div class="price">
+        ₹350 <br /> $4.09
+      </div>
+      <button class="purchase-btn" onclick="openModal('6 Months')">Purchase</button>
     </div>
   </div>
 
-  <div class="payment-methods" id="payment">
-    <h2>Payment Methods</h2>
-    <div class="upi">
-      <strong>UPI (India):</strong><br>
-      Paytm, GPay, PhonePe<br>
-      <em>UPI ID:</em> <code>your-upi@okaxis</code>
-    </div>
-    <div class="qr">
-      <img src="images/qr.png" alt="QR Code" class="qr" />
-    </div>
-    <div class="binance">
-      <strong>International (Binance Pay):</strong><br>
-      USDT (TRC20 Network)<br>
-      <em>Binance Pay ID:</em> <code>your-binance-id</code>
+  <div class="modal" id="paymentModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Please choose payment method</h2>
+      <div class="payment-methods">
+        <button onclick="showSummary('UPI')">UPI / QR (Paytm, GPay, PhonePe)</button>
+        <button onclick="showSummary('Binance')">Binance Pay (USDT - TRC20)</button>
+      </div>
+      <div class="payment-summary" id="summaryBox">
+        <h3>Payment Summary</h3>
+        <p><strong>Method:</strong> <span id="method">-</span></p>
+        <p><strong>Plan:</strong> <span id="plan">-</span></p>
+        <div class="qr">
+          <img id="qrCode" src="" alt="QR Code" width="180" />
+        </div>
+        <p><strong>UPI ID:</strong> yourupi@upi</p>
+        <p><strong>Binance ID:</strong> 123456789</p>
+        <div class="contact-us">
+          ✉ Contact us after payment:<br />
+          Telegram: @yourtelegram | WhatsApp: +91-XXXXX-XXXXX
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    function showPayments() {
-      document.getElementById("payment").style.display = "block";
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    let selectedPlan = '';
+    function openModal(plan) {
+      selectedPlan = plan;
+      document.getElementById('plan').textContent = plan;
+      document.getElementById('paymentModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('paymentModal').style.display = 'none';
+      document.getElementById('summaryBox').style.display = 'none';
+    }
+    function showSummary(method) {
+      document.getElementById('method').textContent = method;
+      document.getElementById('qrCode').src = method === 'UPI' ? 'upi-qr.png' : 'binance-qr.png';
+      document.getElementById('summaryBox').style.display = 'block';
     }
   </script>
 </body>
