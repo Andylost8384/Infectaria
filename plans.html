@@ -1,179 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Choose Plan - Infectaria</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose a Plan</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #0e0e0e;
-      color: #fff;
       margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .plans {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .plan-card {
-      background: #1a1a2e;
-      border: 1px solid #2c3e50;
-      border-radius: 8px;
-      padding: 20px;
-      width: 200px;
-      text-align: center;
-    }
-    .plan-card h2 {
-      margin: 10px 0;
-      font-size: 22px;
-    }
-    .price {
-      font-size: 28px;
-      color: #3498db;
-    }
-    .purchase-btn {
-      margin-top: 20px;
-      padding: 10px;
-      width: 100%;
-      background: transparent;
-      border: 1px solid #3498db;
-      color: #3498db;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .purchase-btn:hover {
-      background: #3498db;
+      font-family: Arial, sans-serif;
+      background-color: #0f1624;
       color: white;
     }
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
+
+    .container {
+      display: flex;
       justify-content: center;
-      align-items: center;
-      z-index: 10;
+      gap: 30px;
+      padding: 50px 20px;
     }
-    .modal-content {
-      background: #1a1a2e;
+
+    .plan {
+      background-color: #1a2332;
+      border: 1px solid #3c4f6e;
+      border-radius: 10px;
       padding: 30px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 600px;
+      width: 220px;
+      text-align: center;
     }
-    .payment-methods button {
-      display: block;
-      width: 100%;
+
+    .plan h2 {
+      font-size: 22px;
       margin-bottom: 10px;
-      padding: 12px;
-      background: #2c3e50;
-      color: #fff;
-      border: none;
+    }
+
+    .plan .price {
+      font-size: 34px;
+      color: #2a8df4;
+      margin: 20px 0;
+    }
+
+    .plan button {
+      padding: 10px 20px;
+      border: 1px solid #2a8df4;
+      background: none;
+      color: #2a8df4;
       border-radius: 5px;
       cursor: pointer;
-      text-align: left;
+      font-weight: bold;
     }
-    .payment-summary {
+
+    .modal, .payment-summary {
       display: none;
-      margin-top: 20px;
-      background: #111;
-      padding: 20px;
-      border-radius: 6px;
-      color: #ccc;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #182033;
+      padding: 30px;
+      border-radius: 10px;
+      z-index: 9999;
+      width: 90%;
+      max-width: 500px;
     }
+
+    .modal h3, .payment-summary h3 {
+      margin-top: 0;
+    }
+
+    .modal ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .modal ul li {
+      padding: 10px;
+      border-bottom: 1px solid #3c4f6e;
+      cursor: pointer;
+    }
+
     .qr {
       text-align: center;
-      margin: 15px 0;
     }
-    .contact-us {
-      margin-top: 20px;
-      font-size: 14px;
-      text-align: center;
+
+    .qr img {
+      max-width: 200px;
     }
-    .close-btn {
-      float: right;
-      color: red;
+
+    .close {
+      text-align: right;
       cursor: pointer;
       font-weight: bold;
+      margin-top: -20px;
+      margin-right: -20px;
     }
   </style>
 </head>
 <body>
-  <h1>Select Your Plan</h1>
-  <div class="plans">
-    <div class="plan-card">
-      <h2>1 Month</h2>
-      <div class="price">
-        ₹69 <br /> $0.81
-      </div>
-      <button class="purchase-btn" onclick="openModal('1 Month')">Purchase</button>
-    </div>
-    <div class="plan-card">
-      <h2>3 Months</h2>
-      <div class="price">
-        ₹190 <br /> $2.22
-      </div>
-      <button class="purchase-btn" onclick="openModal('3 Months')">Purchase</button>
-    </div>
-    <div class="plan-card">
-      <h2>6 Months</h2>
-      <div class="price">
-        ₹350 <br /> $4.09
-      </div>
-      <button class="purchase-btn" onclick="openModal('6 Months')">Purchase</button>
-    </div>
-  </div>
 
-  <div class="modal" id="paymentModal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h2>Please choose payment method</h2>
-      <div class="payment-methods">
-        <button onclick="showSummary('UPI')">UPI / QR (Paytm, GPay, PhonePe)</button>
-        <button onclick="showSummary('Binance')">Binance Pay (USDT - TRC20)</button>
-      </div>
-      <div class="payment-summary" id="summaryBox">
-        <h3>Payment Summary</h3>
-        <p><strong>Method:</strong> <span id="method">-</span></p>
-        <p><strong>Plan:</strong> <span id="plan">-</span></p>
-        <div class="qr">
-          <img id="qrCode" src="" alt="QR Code" width="180" />
-        </div>
-        <p><strong>UPI ID:</strong> yourupi@upi</p>
-        <p><strong>Binance ID:</strong> 123456789</p>
-        <div class="contact-us">
-          ✉ Contact us after payment:<br />
-          Telegram: @yourtelegram | WhatsApp: +91-XXXXX-XXXXX
-        </div>
-      </div>
-    </div>
+<div class="container">
+  <div class="plan">
+    <h2>1 Month</h2>
+    <div class="price">₹69<br><span style="font-size:14px; color:#aaa;">($0.81)</span></div>
+    <button onclick="startPurchase('1 Month')">Purchase</button>
   </div>
+  <div class="plan">
+    <h2>3 Months</h2>
+    <div class="price">₹190<br><span style="font-size:14px; color:#aaa;">($2.22)</span></div>
+    <button onclick="startPurchase('3 Months')">Purchase</button>
+  </div>
+  <div class="plan">
+    <h2>6 Months</h2>
+    <div class="price">₹350<br><span style="font-size:14px; color:#aaa;">($4.09)</span></div>
+    <button onclick="startPurchase('6 Months')">Purchase</button>
+  </div>
+</div>
 
-  <script>
-    let selectedPlan = '';
-    function openModal(plan) {
-      selectedPlan = plan;
-      document.getElementById('plan').textContent = plan;
-      document.getElementById('paymentModal').style.display = 'flex';
+<div id="paymentModal" class="modal">
+  <div class="close" onclick="closeModal()">✖</div>
+  <h3>Please choose payment method</h3>
+  <ul>
+    <li onclick="showSummary('UPI')">UPI / QR</li>
+    <li onclick="showSummary('Binance')">Binance Pay</li>
+  </ul>
+</div>
+
+<div id="summaryModal" class="payment-summary">
+  <div class="close" onclick="closeSummary()">✖</div>
+  <h3>Payment Summary</h3>
+  <div class="qr" id="qrDetails"></div>
+</div>
+
+<script>
+  let selectedPlan = '';
+  let loggedIn = false; // simulate login status
+
+  function startPurchase(plan) {
+    selectedPlan = plan;
+    if (!loggedIn) {
+      alert('Please sign in or sign up before purchasing.');
+      window.location.href = 'login.html';
+      return;
     }
-    function closeModal() {
-      document.getElementById('paymentModal').style.display = 'none';
-      document.getElementById('summaryBox').style.display = 'none';
+    document.getElementById('paymentModal').style.display = 'block';
+  }
+
+  function showSummary(method) {
+    const qrDiv = document.getElementById('qrDetails');
+    let qrHTML = '';
+
+    if (method === 'UPI') {
+      qrHTML = `
+        <p><strong>Method:</strong> UPI / QR</p>
+        <p><strong>Plan:</strong> ${selectedPlan}</p>
+        <img src="https://i.postimg.cc/FRMdBhRv/photo-2025-07-05-20-35-49.jpg" alt="UPI QR">
+        <p>Send UPI payment and <strong>contact us after payment</strong>:</p>
+        <p>📱 Telegram: @YourUsername</p>
+        <p>📞 WhatsApp: +91-XXXXXXXXXX</p>
+      `;
+    } else {
+      qrHTML = `
+        <p><strong>Method:</strong> Binance Pay (USDT - TRC20)</p>
+        <p><strong>Plan:</strong> ${selectedPlan}</p>
+        <img src="https://i.postimg.cc/28KRR3Yn/photo-2025-06-22-18-14-29.jpg" alt="Binance QR">
+        <p>Send payment and <strong>contact us after payment</strong>:</p>
+        <p>📱 Telegram: @YourUsername</p>
+        <p>📞 WhatsApp: +91-XXXXXXXXXX</p>
+      `;
     }
-    function showSummary(method) {
-      document.getElementById('method').textContent = method;
-      document.getElementById('qrCode').src = method === 'UPI' ? 'upi-qr.png' : 'binance-qr.png';
-      document.getElementById('summaryBox').style.display = 'block';
-    }
-  </script>
+
+    qrDiv.innerHTML = qrHTML;
+    document.getElementById('paymentModal').style.display = 'none';
+    document.getElementById('summaryModal').style.display = 'block';
+  }
+
+  function closeModal() {
+    document.getElementById('paymentModal').style.display = 'none';
+  }
+
+  function closeSummary() {
+    document.getElementById('summaryModal').style.display = 'none';
+  }
+</script>
+
 </body>
 </html>
