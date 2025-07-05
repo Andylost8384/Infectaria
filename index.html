@@ -4,6 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Infectaria</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBDHMczYxUSXcoZuQRYh-wsDu4W_FuuukI",
+      authDomain: "infectaria-3cacf.firebaseapp.com",
+      projectId: "infectaria-3cacf",
+      storageBucket: "infectaria-3cacf.firebasestorage.app",
+      messagingSenderId: "323281294881",
+      appId: "1:323281294881:web:b339985000dec8b9bc3560"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.onload = () => {
+      const loginBtn = document.querySelector(".login-btn");
+      const joinBtn = document.querySelector(".join-btn");
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          loginBtn.textContent = "LOGOUT";
+          loginBtn.href = "#";
+          loginBtn.addEventListener("click", () => {
+            auth.signOut();
+            window.location.reload();
+          });
+        } else {
+          loginBtn.textContent = "LOGIN";
+          loginBtn.href = "login.html";
+        }
+      });
+    }
+  </script>
   <style>
     body {
       margin: 0;
