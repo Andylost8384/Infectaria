@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join - Infectaria</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('BACKGROUND_IMAGE_URL') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 40px 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      margin-top: 40px;
+    }
+    h2 {
+      text-align: center;
+      color: #f43672;
+    }
+    .step {
+      display: none;
+    }
+    .step.active {
+      display: block;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+    }
+    button {
+      background: #f43672;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .subscription-option, .payment-option {
+      padding: 15px;
+      background: #222;
+      margin-bottom: 10px;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .subscription-option.selected, .payment-option.selected {
+      border-color: #f43672;
+      background: #333;
+    }
+    .qr-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .qr-section img {
+      width: 250px;
+      border-radius: 10px;
+    }
+    .contact-info {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .contact-info a {
+      color: #f43672;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="step1" class="step active">
+      <h2>Create Account</h2>
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button onclick="nextStep(2)">Continue</button>
+    </div>
+
+    <div id="step2" class="step">
+      <h2>Choose Subscription</h2>
+      <div class="subscription-option" onclick="selectSubscription(this, '1 Month')">1 Month - ₹69 / $0.81</div>
+      <div class="subscription-option" onclick="selectSubscription(this, '3 Month')">3 Month - ₹190 / $2.22</div>
+      <div class="subscription-option" onclick="selectSubscription(this, '6 Month')">6 Month - ₹350 / $4.09</div>
+      <button onclick="nextStep(3)">Continue</button>
+    </div>
+
+    <div id="step3" class="step">
+      <h2>Select Payment Method</h2>
+      <div class="payment-option" onclick="selectPayment(this, 'upi')">UPI / QR (India)</div>
+      <div class="payment-option" onclick="selectPayment(this, 'binance')">Binance Pay (International)</div>
+      <button onclick="nextStep(4)">Continue</button>
+    </div>
+
+    <div id="step4" class="step">
+      <h2>Make Payment</h2>
+      <div class="qr-section" id="upiSection" style="display:none">
+        <h3>Scan UPI QR</h3>
+        <img src="https://i.postimg.cc/FRMdBhRv/photo-2025-07-05-20-35-49.jpg" alt="UPI QR">
+        <p>UPI ID: <strong>paytminfectaria@ybl</strong></p>
+      </div>
+      <div class="qr-section" id="binanceSection" style="display:none">
+        <h3>Binance Pay</h3>
+        <img src="https://i.postimg.cc/28KRR3Yn/photo-2025-06-22-18-14-29.jpg" alt="Binance QR">
+        <p>Binance Pay ID: <strong>298217199</strong></p>
+      </div>
+      <div class="contact-info">
+        AFTER PAYMENT, SEND SCREENSHOT VIA <br>
+        <a href="https://t.me/AsiaModelMedia" target="_blank">Telegram</a> or <a href="https://wa.me/918989898989" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let selectedSubscription = '';
+    let selectedPayment = '';
+
+    function nextStep(step) {
+      const current = document.querySelector('.step.active');
+      if (step === 2 && (!email.value || !password.value)) {
+        alert('Enter email and password');
+        return;
+      }
+      if (step === 3 && !selectedSubscription) {
+        alert('Choose a subscription');
+        return;
+      }
+      if (step === 4 && !selectedPayment) {
+        alert('Select a payment method');
+        return;
+      }
+      current.classList.remove('active');
+      document.getElementById('step' + step).classList.add('active');
+
+      if (step === 4) {
+        document.getElementById('upiSection').style.display = selectedPayment === 'upi' ? 'block' : 'none';
+        document.getElementById('binanceSection').style.display = selectedPayment === 'binance' ? 'block' : 'none';
+      }
+    }
+
+    function selectSubscription(elem, value) {
+      document.querySelectorAll('.subscription-option').forEach(el => el.classList.remove('selected'));
+      elem.classList.add('selected');
+      selectedSubscription = value;
+    }
+
+    function selectPayment(elem, value) {
+      document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
+      elem.classList.add('selected');
+      selectedPayment = value;
+    }
+  </script>
+</body>
+</html>
