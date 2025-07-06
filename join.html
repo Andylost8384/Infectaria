@@ -3,158 +3,200 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join - Infectaria</title>
+  <title>Join Now - Infectaria</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('BACKGROUND_IMAGE_URL') no-repeat center center fixed;
-      background-size: cover;
+      background: url('https://i.postimg.cc/J4c8JZLC/Screenshot-2025-07-06-200431.png') center center / cover no-repeat fixed;
       color: white;
     }
-    .container {
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      min-height: 100vh;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+    }
+
+    .step {
+      padding: 10px 20px;
+      border-radius: 20px;
+      background-color: #333;
+      color: #999;
+    }
+
+    .step.active {
+      background-color: #f43672;
+      color: white;
+      font-weight: bold;
+    }
+
+    .content {
       max-width: 500px;
       margin: auto;
-      padding: 40px 20px;
-      background-color: rgba(0, 0, 0, 0.8);
+      background: rgba(20, 20, 20, 0.9);
+      padding: 30px;
       border-radius: 10px;
-      margin-top: 40px;
     }
-    h2 {
-      text-align: center;
-      color: #f43672;
-    }
-    .step {
-      display: none;
-    }
-    .step.active {
-      display: block;
-    }
+
     input, select, button {
       width: 100%;
+      margin-top: 15px;
       padding: 12px;
-      margin: 10px 0;
       border: none;
-      border-radius: 6px;
+      border-radius: 5px;
+      font-size: 16px;
     }
+
     button {
-      background: #f43672;
+      background-color: #f43672;
       color: white;
-      font-weight: bold;
       cursor: pointer;
     }
-    .subscription-option, .payment-option {
+
+    .plans, .payments {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .plan, .payment-option {
       padding: 15px;
-      background: #222;
-      margin-bottom: 10px;
-      border: 2px solid transparent;
-      border-radius: 6px;
+      background: #1a1a1a;
+      border: 2px solid #444;
+      border-radius: 10px;
       cursor: pointer;
     }
-    .subscription-option.selected, .payment-option.selected {
+
+    .plan.active, .payment-option.active {
       border-color: #f43672;
-      background: #333;
+      background-color: #2a2a2a;
     }
-    .qr-section {
-      text-align: center;
+
+    .qr-image {
+      width: 100%;
+      border-radius: 10px;
       margin-top: 20px;
     }
-    .qr-section img {
-      width: 250px;
-      border-radius: 10px;
-    }
-    .contact-info {
+
+    .bold-text {
       margin-top: 30px;
-      text-align: center;
       font-size: 16px;
       font-weight: bold;
-    }
-    .contact-info a {
       color: #f43672;
-      text-decoration: none;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="step1" class="step active">
-      <h2>Create Account</h2>
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <button onclick="nextStep(2)">Continue</button>
+  <div class="overlay">
+    <div class="steps">
+      <div class="step active" id="step1btn">1. Create Account</div>
+      <div class="step" id="step2btn">2. Choose Plan</div>
+      <div class="step" id="step3btn">3. Payment Method</div>
+      <div class="step" id="step4btn">4. Pay & Verify</div>
     </div>
 
-    <div id="step2" class="step">
-      <h2>Choose Subscription</h2>
-      <div class="subscription-option" onclick="selectSubscription(this, '1 Month')">1 Month - ₹69 / $0.81</div>
-      <div class="subscription-option" onclick="selectSubscription(this, '3 Month')">3 Month - ₹190 / $2.22</div>
-      <div class="subscription-option" onclick="selectSubscription(this, '6 Month')">6 Month - ₹350 / $4.09</div>
+    <div class="content" id="step1">
+      <h2>Create Your Account</h2>
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <button onclick="createAccount()">Continue</button>
+    </div>
+
+    <div class="content" id="step2" style="display: none">
+      <h2>Select Subscription Plan</h2>
+      <div class="plans">
+        <div class="plan" onclick="selectPlan(this, '1 Month')">1 Month - ₹69 / $0.81</div>
+        <div class="plan" onclick="selectPlan(this, '3 Month')">3 Month - ₹190 / $2.22</div>
+        <div class="plan" onclick="selectPlan(this, '6 Month')">6 Month - ₹350 / $4.09</div>
+      </div>
       <button onclick="nextStep(3)">Continue</button>
     </div>
 
-    <div id="step3" class="step">
+    <div class="content" id="step3" style="display: none">
       <h2>Select Payment Method</h2>
-      <div class="payment-option" onclick="selectPayment(this, 'upi')">UPI / QR (India)</div>
-      <div class="payment-option" onclick="selectPayment(this, 'binance')">Binance Pay (International)</div>
+      <div class="payments">
+        <div class="payment-option" onclick="selectPayment(this, 'UPI')">UPI (India)</div>
+        <div class="payment-option" onclick="selectPayment(this, 'Binance')">Binance Pay (International)</div>
+      </div>
       <button onclick="nextStep(4)">Continue</button>
     </div>
 
-    <div id="step4" class="step">
+    <div class="content" id="step4" style="display: none">
       <h2>Make Payment</h2>
-      <div class="qr-section" id="upiSection" style="display:none">
-        <h3>Scan UPI QR</h3>
-        <img src="https://i.postimg.cc/FRMdBhRv/photo-2025-07-05-20-35-49.jpg" alt="UPI QR">
-        <p>UPI ID: <strong>paytminfectaria@ybl</strong></p>
-      </div>
-      <div class="qr-section" id="binanceSection" style="display:none">
-        <h3>Binance Pay</h3>
-        <img src="https://i.postimg.cc/28KRR3Yn/photo-2025-06-22-18-14-29.jpg" alt="Binance QR">
-        <p>Binance Pay ID: <strong>298217199</strong></p>
-      </div>
-      <div class="contact-info">
-        AFTER PAYMENT, SEND SCREENSHOT VIA <br>
-        <a href="https://t.me/AsiaModelMedia" target="_blank">Telegram</a> or <a href="https://wa.me/918989898989" target="_blank">WhatsApp</a>
+      <div id="paymentDetails"></div>
+      <div class="bold-text">
+        After payment, send a screenshot on
+        <a href="https://t.me/AsiaModelMedia">Telegram</a> or
+        <a href="https://wa.me/918989898989">WhatsApp</a>
       </div>
     </div>
   </div>
 
-  <script>
-    let selectedSubscription = '';
-    let selectedPayment = '';
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
+    import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
 
-    function nextStep(step) {
-      const current = document.querySelector('.step.active');
-      if (step === 2 && (!email.value || !password.value)) {
-        alert('Enter email and password');
-        return;
-      }
-      if (step === 3 && !selectedSubscription) {
-        alert('Choose a subscription');
-        return;
-      }
-      if (step === 4 && !selectedPayment) {
-        alert('Select a payment method');
-        return;
-      }
-      current.classList.remove('active');
-      document.getElementById('step' + step).classList.add('active');
+    const firebaseConfig = {
+      apiKey: "AIzaSyBDHMczYxUSXcoZuQRYh-wsDu4W_FuuukI",
+      authDomain: "infectaria-3cacf.firebaseapp.com",
+      projectId: "infectaria-3cacf",
+      storageBucket: "infectaria-3cacf.appspot.com",
+      messagingSenderId: "323281294881",
+      appId: "1:323281294881:web:b339985000dec8b9bc3560"
+    };
 
-      if (step === 4) {
-        document.getElementById('upiSection').style.display = selectedPayment === 'upi' ? 'block' : 'none';
-        document.getElementById('binanceSection').style.display = selectedPayment === 'binance' ? 'block' : 'none';
-      }
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    function createAccount() {
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          nextStep(2);
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     }
 
-    function selectSubscription(elem, value) {
-      document.querySelectorAll('.subscription-option').forEach(el => el.classList.remove('selected'));
-      elem.classList.add('selected');
-      selectedSubscription = value;
+    function nextStep(stepNum) {
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById("step" + i).style.display = "none";
+        document.getElementById("step" + i + "btn").classList.remove("active");
+      }
+      document.getElementById("step" + stepNum).style.display = "block";
+      document.getElementById("step" + stepNum + "btn").classList.add("active");
     }
 
-    function selectPayment(elem, value) {
-      document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
-      elem.classList.add('selected');
-      selectedPayment = value;
+    let selectedPlan = "";
+    function selectPlan(element, planName) {
+      document.querySelectorAll(".plan").forEach(p => p.classList.remove("active"));
+      element.classList.add("active");
+      selectedPlan = planName;
+    }
+
+    let selectedMethod = "";
+    function selectPayment(element, method) {
+      document.querySelectorAll(".payment-option").forEach(p => p.classList.remove("active"));
+      element.classList.add("active");
+      selectedMethod = method;
+
+      const details = document.getElementById("paymentDetails");
+      details.innerHTML = method === "UPI"
+        ? `<img class="qr-image" src="https://i.postimg.cc/FRMdBhRv/photo-2025-07-05-20-35-49.jpg"><p>UPI ID: paytminfectaria@ybl</p>`
+        : `<img class="qr-image" src="https://i.postimg.cc/28KRR3Yn/photo-2025-06-22-18-14-29.jpg"><p>Binance Pay ID: 298217199</p>`;
     }
   </script>
 </body>
