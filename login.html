@@ -2,78 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - Infectaria</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://i.postimg.cc/J4c8JZLC/Screenshot-2025-07-06-200431.png') no-repeat center center fixed;
-      background-size: cover;
-    }
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
-      width: 100%;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    .form-box {
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 40px;
-      border-radius: 10px;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-    }
-    .form-box h2 {
-      color: white;
-      margin-bottom: 20px;
-    }
-    .form-box input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      border: none;
-      outline: none;
-    }
-    .form-box button {
-      background-color: #f43672;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      width: 100%;
-    }
-    .form-box p {
-      color: white;
-      margin-top: 10px;
-    }
-    .form-box a {
-      color: #f43672;
-      text-decoration: none;
-    }
-  </style>
-</head>
-<body>
-  <div class="overlay">
-    <div class="form-box">
-      <h2>Login to Your Account</h2>
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <button onclick="login()">Continue</button>
-      <p><a href="forgot.html">Forgot Password?</a> | <a href="signup.html">Create Account</a></p>
-    </div>
-  </div>
-
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
@@ -95,11 +25,51 @@
       const password = document.getElementById("password").value;
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          alert("Logged in successfully");
+          // No alert, just direct redirect to join step 2
           window.location.href = "join.html?step=2";
         })
         .catch((error) => alert(error.message));
     }
   </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 8px;
+      border-radius: 5px;
+      border: none;
+      width: 250px;
+    }
+
+    button {
+      background-color: #f43672;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    a {
+      color: #f43672;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Login</h2>
+  <input type="email" id="email" placeholder="Email" required /><br />
+  <input type="password" id="password" placeholder="Password" required /><br />
+  <button onclick="login()">Login</button>
+  <p><a href="signup.html">Create Account</a> | <a href="forgot.html">Forgot Password?</a></p>
 </body>
 </html>
