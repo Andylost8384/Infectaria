@@ -96,7 +96,7 @@
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
           alert("Logged in successfully");
-          window.location.href = "index.html";
+          window.location.href = "join.html?step=2";
         })
         .catch((error) => alert(error.message));
     }
