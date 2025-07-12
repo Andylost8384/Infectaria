@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join Now - Infectaria</title>
+  <title>Login - Infectaria</title>
   <style>
     body {
       margin: 0;
@@ -68,27 +68,36 @@
       font-weight: bold;
       width: 100%;
     }
+    .form-box p {
+      color: white;
+      margin-top: 10px;
+    }
+    .form-box a {
+      color: #f43672;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <div class="overlay">
     <div class="step-indicator">
-      <div class="step active">1. Create Account</div>
+      <div class="step active">1. Login</div>
       <div class="step">2. Choose Plan</div>
       <div class="step">3. Payment Method</div>
       <div class="step">4. Pay & Verify</div>
     </div>
     <div class="form-box">
-      <h2>Create Your Account</h2>
+      <h2>Login to Your Account</h2>
       <input type="email" id="email" placeholder="Email" required />
       <input type="password" id="password" placeholder="Password" required />
-      <button id="signupBtn">Continue</button>
+      <button onclick="login()">Continue</button>
+      <p><a href="forgot.html">Forgot Password?</a> | <a href="signup.html">Create Account</a></p>
     </div>
   </div>
 
   <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
-    import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBDHMczYxUSXcoZuQRYh-wsDu4W_FuuukI",
@@ -100,29 +109,18 @@
     };
 
     const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    const auth = getAuth();
 
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const signupBtn = document.getElementById('signupBtn');
-
-    signupBtn.addEventListener('click', async () => {
-      const email = emailInput.value;
-      const password = passwordInput.value;
-      try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        window.location.href = 'plans.html';
-      } catch (error) {
-        alert(error.message);
-      }
-    });
-
-    // If already logged in, skip Step 1
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        window.location.href = 'plans.html';
-      }
-    });
+    window.login = () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          alert("Logged in successfully");
+          window.location.href = "index.html";
+        })
+        .catch((error) => alert(error.message));
+    }
   </script>
 </body>
 </html>
