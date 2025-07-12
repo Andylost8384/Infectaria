@@ -120,6 +120,53 @@
           window.location.href = "index.html";
         })
         .catch((error) => alert(error.message));
+// Scroll to proper step based on URL param
+const urlParams = new URLSearchParams(window.location.search);
+const currentStep = urlParams.get('step') || "1";
+
+// Step elements
+const steps = document.querySelectorAll(".step");
+steps.forEach((step, index) => {
+  if (index === parseInt(currentStep) - 1) {
+    step.classList.add("active");
+  } else {
+    step.classList.remove("active");
+  }
+});
+
+// Change heading based on step
+const heading = document.querySelector(".form-box h2");
+const formBox = document.querySelector(".form-box");
+
+if (currentStep === "2") {
+  heading.textContent = "Choose Your Plan";
+  formBox.innerHTML += `
+    <p style="color:white;">(Yahan plans ke buttons ya form lagao)</p>
+    <button onclick="nextStep()">Continue to Payment</button>
+  `;
+} else if (currentStep === "3") {
+  heading.textContent = "Select Payment Method";
+  formBox.innerHTML += `
+    <p style="color:white;">(Yahan payment method lagao)</p>
+    <button onclick="nextStep()">Continue to Verification</button>
+  `;
+} else if (currentStep === "4") {
+  heading.textContent = "Verify & Access";
+  formBox.innerHTML += `
+    <p style="color:white;">(Yahan verification step lagao)</p>
+    <button onclick="finish()">Finish</button>
+  `;
+}
+
+// Step Navigation (for demo, you can expand it)
+function nextStep() {
+  const next = parseInt(currentStep) + 1;
+  window.location.href = `join.html?step=${next}`;
+}
+function finish() {
+  alert("All steps completed!");
+  window.location.href = "index.html";
+}
     }
   </script>
 </body>
