@@ -1,0 +1,100 @@
+<!-- video.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0e0e0e;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #f43672;
+      font-size: 28px;
+    }
+
+    video {
+      width: 100%;
+      max-width: 800px;
+      display: block;
+      margin: 20px auto;
+    }
+
+    p {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #ccc;
+    }
+
+    .back {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .back a {
+      padding: 10px 20px;
+      background-color: #f1a6b8;
+      color: black;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="video-title">Loading...</h1>
+  <video id="video-player" controls muted></video>
+  <p id="video-description"></p>
+
+  <div class="back">
+    <a href="all-videos.html">⬅ Back to All Videos</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get("v");
+
+    const videos = {
+      "one-quick-stop": {
+        title: "One Quick Stop",
+        file: "videos/onequickstop.mp4",
+        description: "A short but intense alien encounter in the storage room."
+      },
+      "the-succubus-act-1": {
+        title: "The Succubus Act 1",
+        file: "videos/succubus1.mp4",
+        description: "The beginning of the seductive succubus saga."
+      },
+      "the-succubus-act-2": {
+        title: "The Succubus Act 2",
+        file: "videos/succubus2.mp4",
+        description: "Things escalate in Act 2 of the succubus tale."
+      },
+      "the-succubus-act-3": {
+        title: "The Succubus Act 3",
+        file: "videos/succubus3.mp4",
+        description: "The final climax of the succubus trilogy."
+      }
+      // add more here
+    };
+
+    const video = videos[videoId];
+
+    if (video) {
+      document.getElementById("video-title").textContent = video.title;
+      document.getElementById("video-player").src = video.file;
+      document.getElementById("video-description").textContent = video.description;
+    } else {
+      document.getElementById("video-title").textContent = "Video Not Found";
+      document.getElementById("video-description").textContent = "The video you're looking for doesn't exist.";
+    }
+  </script>
+</body>
+</html>
