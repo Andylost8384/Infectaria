@@ -2,42 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>All Videos - Infectaria</title>
   <style>
     body {
       margin: 0;
+      font-family: Arial, sans-serif;
       background-color: #0e0e0e;
       color: white;
-      font-family: Arial, sans-serif;
-    }
-
-    header {
-      background-color: #111;
       padding: 20px;
-      text-align: center;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
+    h1 {
+      text-align: center;
       color: #f43672;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-      padding: 20px;
-      background: linear-gradient(to right, red, darkred);
+      margin-bottom: 30px;
     }
 
     .video-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      padding: 0;
-      margin: 0;
+      gap: 12px;
     }
 
     .video-card {
@@ -49,41 +34,42 @@
       width: 100%;
       height: auto;
       display: block;
+      border-radius: 8px;
     }
 
     .video-title {
       position: absolute;
       bottom: 10px;
       left: 10px;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0,0,0,0.5);
       padding: 5px 10px;
       border-radius: 5px;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       color: white;
     }
 
-    .back-button {
+    .back-home {
+      margin-top: 30px;
       text-align: center;
-      margin: 30px 0;
     }
 
-    .back-button a {
+    .back-home a {
       padding: 10px 25px;
       background-color: #f1a6b8;
       color: black;
       text-decoration: none;
-      font-weight: bold;
       border-radius: 8px;
+      font-weight: bold;
     }
 
-    @media (max-width: 900px) {
+    @media screen and (max-width: 900px) {
       .video-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    @media (max-width: 600px) {
+    @media screen and (max-width: 600px) {
       .video-grid {
         grid-template-columns: 1fr;
       }
@@ -91,44 +77,42 @@
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>All Videos</h1>
-  </header>
-
-  <div class="section-title">🔥 Complete Scene Library</div>
+  <h1>All Videos</h1>
 
   <div class="video-grid">
     <div class="video-card">
-      <a href="the-succubus-act-1.html">
-        <video src="videos/succubus1.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
-        <div class="video-title">The Succubus Act 1</div>
-      </a>
-    </div>
-    <div class="video-card">
-      <a href="the-succubus-act-2.html">
-        <video src="videos/succubus2.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
-        <div class="video-title">The Succubus Act 2</div>
-      </a>
-    </div>
-    <div class="video-card">
-      <a href="the-succubus-act-3.html">
-        <video src="videos/succubus3.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
-        <div class="video-title">The Succubus Act 3</div>
-      </a>
-    </div>
-    <div class="video-card">
-      <a href="one-quick-stop.html">
-        <video src="videos/onequickstop.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
+      <a href="video.html?v=one-quick-stop">
+        <video src="videos/onequickstop.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
         <div class="video-title">One Quick Stop</div>
       </a>
     </div>
-    <!-- Add more videos here if needed -->
+
+    <div class="video-card">
+      <a href="video.html?v=the-succubus-act-3">
+        <video src="videos/succubus3.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
+        <div class="video-title">The Succubus Act 3</div>
+      </a>
+    </div>
+
+    <div class="video-card">
+      <a href="video.html?v=the-succubus-act-2">
+        <video src="videos/succubus2.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
+        <div class="video-title">The Succubus Act 2</div>
+      </a>
+    </div>
+
+    <div class="video-card">
+      <a href="video.html?v=the-succubus-act-1">
+        <video src="videos/succubus1.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
+        <div class="video-title">The Succubus Act 1</div>
+      </a>
+    </div>
+
+    <!-- Add more videos in same format -->
   </div>
 
-  <div class="back-button">
+  <div class="back-home">
     <a href="index.html">⬅ Back to Home</a>
   </div>
-
 </body>
 </html>
