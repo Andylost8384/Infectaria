@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Player</title>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    video {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 20px;
+    }
+    h1 {
+      margin-top: 20px;
+      color: #f43672;
+    }
+    p {
+      max-width: 1000px;
+      padding: 0 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="video-title">Loading...</h1>
+  <video id="video-player" controls poster="">
+    <source id="video-source" src="" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p id="video-description"></p>
+
+  <script>
+    // Get video ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoId = urlParams.get("id");
+
+    fetch("videos.json")
+      .then(res => res.json())
+      .then(videos => {
+        const video = videos.find(v => v.id === videoId);
+        if (video) {
+          document.getElementById("video-title").textContent = video.title;
+          document.getElementById("video-description").textContent = video.description;
+          document.getElementById("video-source").src = video.url;
+          document.getElementById("video-player").poster = video.poster;
+          document.getElementById("video-player").load();
+        } else {
+          document.getElementById("video-title").textContent = "Video not found.";
+        }
+      })
+      .catch(err => {
+        console.error("Failed to load video:", err);
+        document.getElementById("video-title").textContent = "Error loading video.";
+      });
+  </script>
+</body>
+</html>
