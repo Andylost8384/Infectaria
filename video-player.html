@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Video Player</title>
   <style>
     body {
@@ -33,16 +33,15 @@
 </head>
 <body>
   <h1 id="video-title">Loading...</h1>
-  <video id="video-player" controls poster="">
+  <video id="video-player" controls>
     <source id="video-source" src="" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <p id="video-description"></p>
 
   <script>
-    // Get video ID from URL
     const urlParams = new URLSearchParams(window.location.search);
-    const videoId = urlParams.get("id");
+    const videoId = urlParams.get("v"); // use ?v= format in URL
 
     fetch("videos.json")
       .then(res => res.json())
@@ -50,9 +49,8 @@
         const video = videos.find(v => v.id === videoId);
         if (video) {
           document.getElementById("video-title").textContent = video.title;
-          document.getElementById("video-description").textContent = video.description;
-          document.getElementById("video-source").src = video.url;
-          document.getElementById("video-player").poster = video.poster;
+          document.getElementById("video-description").textContent = video.description || "";
+          document.getElementById("video-source").src = video.videoUrl;
           document.getElementById("video-player").load();
         } else {
           document.getElementById("video-title").textContent = "Video not found.";
