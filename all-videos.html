@@ -79,40 +79,29 @@
 <body>
   <h1>All Videos</h1>
 
-  <div class="video-grid">
-    <div class="video-card">
-      <a href="video.html?v=one-quick-stop">
-        <video src="videos/onequickstop.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
-        <div class="video-title">One Quick Stop</div>
-      </a>
-    </div>
-
-    <div class="video-card">
-      <a href="video.html?v=the-succubus-act-3">
-        <video src="videos/succubus3.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
-        <div class="video-title">The Succubus Act 3</div>
-      </a>
-    </div>
-
-    <div class="video-card">
-      <a href="video.html?v=the-succubus-act-2">
-        <video src="videos/succubus2.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
-        <div class="video-title">The Succubus Act 2</div>
-      </a>
-    </div>
-
-    <div class="video-card">
-      <a href="video.html?v=the-succubus-act-1">
-        <video src="videos/succubus1.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
-        <div class="video-title">The Succubus Act 1</div>
-      </a>
-    </div>
-
-    <!-- Add more videos in same format -->
-  </div>
+  <div id="videos-container" class="video-grid"></div>
 
   <div class="back-home">
     <a href="index.html">⬅ Back to Home</a>
   </div>
+
+  <script>
+    fetch('videos.json')
+      .then(res => res.json())
+      .then(videos => {
+        const container = document.getElementById('videos-container');
+        videos.forEach(video => {
+          const div = document.createElement('div');
+          div.className = 'video-card';
+          div.innerHTML = `
+            <a href="video-player.html?id=${video.id}">
+              <video src="${video.videoUrl}" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
+              <div class="video-title">${video.title}</div>
+            </a>
+          `;
+          container.appendChild(div);
+        });
+      });
+  </script>
 </body>
 </html>
