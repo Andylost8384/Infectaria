@@ -40,26 +40,26 @@
   <p id="video-description"></p>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const videoId = urlParams.get("v"); // use ?v= format in URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const videoId = urlParams.get("id");
 
-    fetch("videos.json")
-      .then(res => res.json())
-      .then(videos => {
-        const video = videos.find(v => v.id === videoId);
-        if (video) {
-          document.getElementById("video-title").textContent = video.title;
-          document.getElementById("video-description").textContent = video.description || "";
-          document.getElementById("video-source").src = video.videoUrl;
-          document.getElementById("video-player").load();
-        } else {
-          document.getElementById("video-title").textContent = "Video not found.";
-        }
-      })
-      .catch(err => {
-        console.error("Failed to load video:", err);
-        document.getElementById("video-title").textContent = "Error loading video.";
-      });
-  </script>
+  fetch("videos.json")
+    .then(res => res.json())
+    .then(videos => {
+      const video = videos.find(v => v.id === videoId);
+      if (video) {
+        document.getElementById("video-title").textContent = video.title;
+        document.getElementById("video-description").textContent = video.description || "";
+        document.getElementById("video-source").src = video.videoUrl; // 👈 FIXED
+        document.getElementById("video-player").load();
+      } else {
+        document.getElementById("video-title").textContent = "Video not found.";
+      }
+    })
+    .catch(err => {
+      console.error("Failed to load video:", err);
+      document.getElementById("video-title").textContent = "Error loading video.";
+    });
+</script>
 </body>
 </html>
