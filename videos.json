@@ -2,7 +2,7 @@
   {
     "id": "one-quick-stop",
     "title": "One Quick Stop",
-    "videoUrl": "https://archive.org/download/one-quick-stop-parasited/One%20Quick%20Stop%20-%20Parasited.mp4"
+    "videoUrl": "<iframe src="https://archive.org/embed/one-quick-stop-parasited" width="560" height="384" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen=""></iframe>"
   },
   {
     "id": "succubus-act-1",
