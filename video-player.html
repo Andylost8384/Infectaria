@@ -47,15 +47,13 @@
     .then(res => res.json())
     .then(videos => {
       const video = videos.find(v => v.id === videoId);
-      if (video) {
-        document.getElementById("video-title").textContent = video.title;
-        document.getElementById("video-description").textContent = video.description || "";
-        document.getElementById("video-source").src = video.videoUrl; // 👈 FIXED
-        document.getElementById("video-player").load();
-      } else {
-        document.getElementById("video-title").textContent = "Video not found.";
-      }
-    })
+if (video) {
+  document.getElementById("video-title").textContent = video.title;
+  const playerContainer = document.getElementById("video-container");
+  playerContainer.innerHTML = `
+    <iframe src="${video.embedUrl}" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+  `;
+}
     .catch(err => {
       console.error("Failed to load video:", err);
       document.getElementById("video-title").textContent = "Error loading video.";
