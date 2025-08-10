@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Watch Video</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #000;
+    margin: 0;
+    color: #fff;
+    text-align: center;
+  }
+  video {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<h1 id="videoTitle">Loading...</h1>
+<video id="mainVideo" controls autoplay></video>
+
+<script>
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+const videoId = getQueryParam('id');
+
+fetch('videos.json?v=' + Date.now())
+  .then(response => response.json())
+  .then(videos => {
+    const videoData = videos[videoId];
+    if (videoData) {
+      document.getElementById('videoTitle').textContent = videoData.title;
+      document.getElementById('mainVideo').src = videoData.fullUrl;
+    } else {
+      document.getElementById('videoTitle').textContent = 'Video not found';
+    }
+  });
+</script>
+
+</body>
+</html>
