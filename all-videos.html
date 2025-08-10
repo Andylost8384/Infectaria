@@ -1,78 +1,120 @@
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: #fff;
-  }
-  .video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-    padding: 20px;
-  }
-  .video-card {
-    background: #222;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    position: relative;
-  }
-  .video-card video, 
-  .video-card img {
-    width: 100%;
-    height: 180px; /* fixed height for uniform grid */
-    object-fit: cover;
-    display: block;
-    background: #000;
-  }
-  .video-title {
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Videos - Infectaria</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      padding: 20px 0;
+      color: #f43672;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+    .video-card {
+      background: #222;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+    .video-card:hover {
+      transform: scale(1.03);
+    }
+    .video-card video, 
+    .video-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      background: #000;
+    }
+    .video-title {
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .back-home {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .back-home a {
+      color: #fff;
+      background: #f43672;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>All Videos</h1>
 
-<script>
-fetch('videos.json?v=' + Date.now())
-  .then(response => response.json())
-  .then(videos => {
-    const grid = document.getElementById('videoGrid');
+  <div id="videoGrid" class="video-grid"></div>
 
-    videos.forEach((video, index) => {
-      const card = document.createElement('div');
-      card.classList.add('video-card');
+  <div class="back-home">
+    <a href="index.html">⬅ Back to Home</a>
+  </div>
 
-      const vidElem = document.createElement('video');
-      vidElem.src = video.previewUrl;
-      vidElem.muted = true;
-      vidElem.preload = "metadata";
+  <script>
+    fetch('videos.json?v=' + Date.now())
+      .then(response => response.json())
+      .then(videos => {
+        const grid = document.getElementById('videoGrid');
 
-      // fallback if video fails
-      vidElem.onerror = () => {
-        const fallback = document.createElement('img');
-        fallback.src = video.thumbnail || 'default-thumbnail.jpg';
-        card.replaceChild(fallback, vidElem);
-      };
+        videos.forEach((video, index) => {
+          const card = document.createElement('div');
+          card.classList.add('video-card');
 
-      card.addEventListener('mouseenter', () => {
-        vidElem.play().catch(() => {});
-      });
-      card.addEventListener('mouseleave', () => {
-        vidElem.pause();
-        vidElem.currentTime = 0;
-      });
+          const vidElem = document.createElement('video');
+          vidElem.src = video.previewUrl;
+          vidElem.muted = true;
+          vidElem.preload = "metadata";
 
-      card.addEventListener('click', () => {
-        window.location.href = `watch.html?id=${index}`;
-      });
+          // Fallback if video fails to load
+          vidElem.onerror = () => {
+            const fallback = document.createElement('img');
+            fallback.src = video.thumbnail || 'default-thumbnail.jpg';
+            card.replaceChild(fallback, vidElem);
+          };
 
-      const title = document.createElement('div');
-      title.classList.add('video-title');
-      title.textContent = video.title;
+          card.addEventListener('mouseenter', () => {
+            vidElem.play().catch(() => {});
+          });
+          card.addEventListener('mouseleave', () => {
+            vidElem.pause();
+            vidElem.currentTime = 0;
+          });
 
-      card.appendChild(vidElem);
-      card.appendChild(title);
-      grid.appendChild(card);
-    });
-  });
-</script>
+          // Click to open watch.html with full video
+          card.addEventListener('click', () => {
+            window.location.href = `watch.html?id=${index}`;
+          });
+
+          const title = document.createElement('div');
+          title.classList.add('video-title');
+          title.textContent = video.title;
+
+          card.appendChild(vidElem);
+          card.appendChild(title);
+          grid.appendChild(card);
+        });
+      })
+      .catch(err => console.error('Error loading videos:', err));
+  </script>
+</body>
+</html>
