@@ -12,48 +12,77 @@
       margin: 0;
       padding: 0;
     }
+
+    /* Stylish Heading */
     h1 {
       text-align: center;
       padding: 20px 0;
-      color: #f43672;
+      color: #ff3366;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      position: relative;
     }
+    h1::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #ff3366;
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    /* Fixed 3 videos per row */
     .video-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 15px;
       padding: 20px;
     }
+
     .video-card {
-      background: #222;
+      position: relative;
+      background: #000;
       border-radius: 8px;
       overflow: hidden;
       cursor: pointer;
-      position: relative;
       transition: transform 0.2s ease;
     }
+
     .video-card:hover {
       transform: scale(1.03);
     }
+
     .video-card video, 
     .video-card img {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
       display: block;
-      background: #000;
     }
+
+    /* Title overlay on top */
     .video-title {
-      padding: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 8px 10px;
       font-size: 16px;
       font-weight: bold;
+      color: #fff;
+      box-sizing: border-box;
     }
+
+    /* Back button */
     .back-home {
       text-align: center;
       padding: 20px 0;
     }
     .back-home a {
       color: #fff;
-      background: #f43672;
+      background: #ff3366;
       padding: 10px 20px;
       border-radius: 5px;
       text-decoration: none;
@@ -85,7 +114,7 @@
           vidElem.muted = true;
           vidElem.preload = "metadata";
 
-          // Fallback if video fails to load
+          // Fallback thumbnail if video fails
           vidElem.onerror = () => {
             const fallback = document.createElement('img');
             fallback.src = video.thumbnail || 'default-thumbnail.jpg';
@@ -100,7 +129,7 @@
             vidElem.currentTime = 0;
           });
 
-          // Click to open watch.html with full video
+          // Click to go watch.html
           card.addEventListener('click', () => {
             window.location.href = `watch.html?id=${index}`;
           });
@@ -109,8 +138,8 @@
           title.classList.add('video-title');
           title.textContent = video.title;
 
-          card.appendChild(vidElem);
           card.appendChild(title);
+          card.appendChild(vidElem);
           grid.appendChild(card);
         });
       })
