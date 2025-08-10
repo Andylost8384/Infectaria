@@ -86,7 +86,7 @@
   </div>
 
   <script>
-    fetch('videos.json')
+    fetch('videos.json?v=' + Date.now())
       .then(res => res.json())
       .then(videos => {
         const container = document.getElementById('videos-container');
