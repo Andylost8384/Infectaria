@@ -17,12 +17,19 @@
     height: auto;
     margin-top: 20px;
   }
+  #qualitySelect {
+    margin-top: 15px;
+    padding: 5px 10px;
+    font-size: 16px;
+  }
 </style>
 </head>
 <body>
 
 <h1 id="videoTitle">Loading...</h1>
 <video id="mainVideo" controls autoplay></video>
+<br>
+<select id="qualitySelect" style="display:none;"></select>
 
 <script>
 function getQueryParam(param) {
@@ -31,6 +38,8 @@ function getQueryParam(param) {
 }
 
 const videoId = getQueryParam('id');
+const videoElement = document.getElementById('mainVideo');
+const qualitySelect = document.getElementById('qualitySelect');
 
 fetch('videos.json?v=' + Date.now())
   .then(response => response.json())
@@ -38,7 +47,37 @@ fetch('videos.json?v=' + Date.now())
     const videoData = videos[videoId];
     if (videoData) {
       document.getElementById('videoTitle').textContent = videoData.title;
-      document.getElementById('mainVideo').src = videoData.fullUrl;
+
+      // Always add 1080p
+      const options = [];
+      if (videoData.fullUrl) {
+        options.push({label: '1080p', url: videoData.fullUrl});
+      }
+      // Add 4K only if available
+      if (videoData.fullUrl4k) {
+        options.push({label: '4K', url: videoData.fullUrl4k});
+      }
+
+      // Load first available quality
+      if (options.length > 0) {
+        videoElement.src = options[0].url;
+      }
+
+      // If more than one quality, show dropdown
+      if (options.length > 1) {
+        qualitySelect.style.display = 'inline-block';
+        options.forEach(opt => {
+          const optionEl = document.createElement('option');
+          optionEl.value = opt.url;
+          optionEl.textContent = opt.label;
+          qualitySelect.appendChild(optionEl);
+        });
+
+        qualitySelect.addEventListener('change', () => {
+          videoElement.src = qualitySelect.value;
+          videoElement.play();
+        });
+      }
     } else {
       document.getElementById('videoTitle').textContent = 'Video not found';
     }
