@@ -6,7 +6,7 @@
   <title>Infectaria</title>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "Key",
@@ -27,9 +27,9 @@
         if (user) {
           loginBtn.textContent = "LOGOUT";
           loginBtn.href = "#";
-          loginBtn.addEventListener("click", () => {
-            auth.signOut();
-            window.location.reload();
+          loginBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            signOut(auth).then(() => window.location.reload());
           });
         } else {
           loginBtn.textContent = "LOGIN";
@@ -44,63 +44,66 @@
       font-family: Arial, sans-serif;
       background-color: #0e0e0e;
       color: white;
-      overflow-x: hidden; /* horizontal scroll hata diya */
+      overflow-x: hidden;
     }
 
-    /* ===== Transparent Navbar ===== */
+    /* ===== Navbar ===== */
     header {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 60px;
-      background: transparent;
+      padding: 15px 30px;
+      background: rgba(0,0,0,0.9);
       z-index: 1000;
     }
 
     header img {
-      height: 100px;
+      height: 60px;
       object-fit: contain;
     }
 
     nav {
       display: flex;
-      gap: 30px;
+      gap: 25px;
       align-items: center;
-      position: relative;
     }
 
     nav a {
       text-decoration: none;
       color: #fff;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 15px;
       transition: 0.3s;
     }
 
     nav a:hover {
-      border-bottom: 2px solid white;
-      padding-bottom: 2px;
+      color: red;
     }
 
-    /* Dropdown for All Videos */
+    /* Dropdown */
     .dropdown {
       position: relative;
+    }
+
+    .dropdown > a::after {
+      content: " ▼";
+      font-size: 12px;
     }
 
     .dropdown-content {
       display: none;
       position: absolute;
-      top: 30px;
+      top: 100%;
       left: 0;
       background-color: #222;
       min-width: 200px;
       border-radius: 6px;
       overflow: hidden;
-      z-index: 1000;
+      z-index: 2000;
     }
 
     .dropdown-content a {
@@ -119,27 +122,30 @@
       display: block;
     }
 
+    /* Auth Buttons */
     .auth-buttons {
       display: flex;
-      gap: 15px;
-      margin-left: 30px;
+      gap: 10px;
     }
 
     .auth-buttons a {
       text-decoration: none;
       font-weight: bold;
       color: #fff;
-      background: red; /* box me red color */
+      background: red;
       padding: 8px 16px;
       border-radius: 6px;
       transition: 0.3s;
+      white-space: nowrap;
     }
 
     .auth-buttons a:hover {
       background: darkred;
     }
 
+    /* Hero Section */
     .hero {
+      margin-top: 100px; /* header ka space */
       position: relative;
       width: 100%;
       height: 80vh;
@@ -260,16 +266,24 @@
       border-radius: 6px;
       text-decoration: none;
     }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
-  <!-- Transparent Header -->
+  <!-- Navbar -->
   <header>
     <img src="https://i.postimg.cc/C5qdD7fB/Chat-GPT-Image-Jul-5-2025-08-45-13-PM.png" alt="Infectaria Logo">
 
     <nav>
       <div class="dropdown">
-        <a href="#">All Videos ▼</a>
+        <a href="#">All Videos</a>
         <div class="dropdown-content">
           <a href="all-videos.html">Hentaied Videos</a>
           <a href="all-lesbian.html">Lesbian Videos</a>
@@ -330,25 +344,15 @@
   </div>
 
   <div class="view-all-container" style="text-align: center; margin-top: 20px;">
-    <!-- First Button -->
-    <a href="all-videos.html" 
-      class="view-all-btn" 
-      style="display: inline-block; padding: 10px 20px; margin: 10px; background: #ff004f; color: white; text-decoration: none; border-radius: 8px;">
+    <a href="all-videos.html" class="view-all-btn" style="display: inline-block; padding: 10px 20px; margin: 10px; background: #ff004f; color: white; text-decoration: none; border-radius: 8px;">
       Hentaied Network All Videos
     </a>
-
-    <!-- Second Button -->
-    <a href="all-lesbian.html" 
-      class="view-all-btn" 
-      style="display: inline-block; padding: 10px 20px; margin: 10px; background: #ff004f; color: white; text-decoration: none; border-radius: 8px;">
+    <a href="all-lesbian.html" class="view-all-btn" style="display: inline-block; padding: 10px 20px; margin: 10px; background: #ff004f; color: white; text-decoration: none; border-radius: 8px;">
       All Lesbian Videos
     </a>
   </div>
 
-  <!-- ========== Footer Section ========== -->
-  <footer style="background-color: black; color: white; text-align: center; padding: 40px 20px; margin-top: 40px;">
-
-    <!-- Site Title -->
+  <footer>
     <h1 style="font-size: 36px; font-weight: bold; letter-spacing: 2px;">INFECTERIA</h1>
     <p style="margin: 5px 0; font-size: 18px;">Made by Ice Bear</p>
     <p style="margin: 5px 0;">
@@ -357,13 +361,8 @@
       </a>
     </p>
 
-    <!-- Empty Black Sections -->
     <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 40px;">
-
-      <!-- Left Empty -->
       <div style="flex: 1; background: black; min-height: 200px;"></div>
-
-      <!-- Middle Info Section -->
       <div style="flex: 1; background: black; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;">
         <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 15px;">About Infecteria</h2>
         <p style="font-size: 14px; line-height: 1.6; max-width: 400px;">
@@ -372,20 +371,13 @@
           By entering, you affirm that you are at least 18 years of age or the age of majority in the jurisdiction you are accessing the website from and you consent to viewing sexually explicit content.
         </p>
       </div>
-
-      <!-- Right Empty -->
       <div style="flex: 1; background: black; min-height: 200px;"></div>
     </div>
 
-    <!-- Bottom Quote -->
     <div style="margin-top: 40px;">
       <p style="font-size: 16px; font-weight: bold;">Site Under Maintenance</p>
       <p style="margin-top: 5px;">— Ice Bear</p>
     </div>
-
   </footer>
-  <!-- ========== End Footer Section ========== -->
-
 </body>
 </html>
-
