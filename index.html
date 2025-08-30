@@ -1,247 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Infectaria</title>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "Key",
-      authDomain: "infectaria-3cacf.firebaseapp.com",
-      projectId: "infectaria-3cacf",
-      storageBucket: "infectaria-3cacf.firebasestorage.app",
-      messagingSenderId: "323281294881",
-      appId: "1:323281294881:web:b339985000dec8b9bc3560"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    window.onload = () => {
-      const loginBtn = document.querySelector(".login-btn");
-
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          loginBtn.textContent = "LOGOUT";
-          loginBtn.href = "#";
-          loginBtn.addEventListener("click", () => {
-            auth.signOut();
-            window.location.reload();
-          });
-        } else {
-          loginBtn.textContent = "LOGIN";
-          loginBtn.href = "login.html";
-        }
-      });
-    }
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hentaied Network</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0e0e0e;
+      padding: 0;
+      background-color: #111;
       color: white;
-      overflow-x: hidden; /* horizontal scroll hata diya */
+      font-family: Arial, sans-serif;
     }
 
-    /* ===== Transparent Navbar ===== */
+    /* Header */
     header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 60px;
-      background: transparent;
-      z-index: 1000;
+      padding: 10px 40px;
+      background-color: #0a0a0a;
     }
 
     header img {
-      height: 100px;
-      object-fit: contain;
+      height: 50px;
     }
 
+    /* Navigation */
     nav {
       display: flex;
-      gap: 30px;
       align-items: center;
+      gap: 30px;
     }
 
     nav a {
       text-decoration: none;
-      color: #fff;
+      color: white;
       font-weight: bold;
       font-size: 16px;
-      transition: 0.3s;
+      position: relative;
     }
 
     nav a:hover {
-      border-bottom: 2px solid white;
-      padding-bottom: 2px;
+      color: red;
     }
 
-    .auth-buttons {
-      display: flex;
-      gap: 15px;
-      margin-left: 30px;
-    }
-
-    .auth-buttons a {
-      text-decoration: none;
-      font-weight: bold;
-      color: #fff;
-      border: 1px solid #fff;
-      padding: 8px 16px;
-      border-radius: 6px;
-      transition: 0.3s;
-    }
-
-    .auth-buttons a:hover {
-      background: #fff;
-      color: #000;
-    }
-
-    .hero {
+    /* Dropdown for All Videos */
+    .dropdown {
       position: relative;
-      width: 100%;
-      height: 80vh;
-      overflow: hidden;
+      display: inline-block;
     }
 
-    .hero video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .hero-content {
+    .dropdown-content {
+      display: none;
       position: absolute;
-      top: 30%;
-      left: 5%;
+      top: 25px;
+      left: 0;
+      background-color: #222;
+      min-width: 180px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+      z-index: 1000;
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
       color: white;
-    }
-
-    .hero-content h2 {
-      font-size: 42px;
-      font-weight: bold;
-      margin: 0;
-    }
-
-    .hero-content h2 span {
-      color: #f43672;
-    }
-
-    .hero-content p {
-      margin-top: 10px;
-      font-size: 16px;
-      color: #ccc;
-    }
-
-    .hero-content a.button {
-      margin-top: 20px;
-      display: inline-block;
-      padding: 12px 30px;
-      background: linear-gradient(to right, #f43672, #8b2cf5);
-      color: white;
-      border-radius: 5px;
       text-decoration: none;
-      font-weight: bold;
     }
 
-    .stats {
-      display: flex;
-      justify-content: space-around;
-      padding: 20px;
-      background-color: #000;
+    .dropdown-content a:hover {
+      background-color: red;
     }
 
-    .stats div {
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .stats span {
-      color: #f43672;
-    }
-
-    .section-title {
-      background: linear-gradient(to right, red, darkred);
-      padding: 12px 25px;
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-      display: inline-block;
-      border-top-right-radius: 8px;
-      border-bottom-right-radius: 8px;
-      margin-bottom: 20px;
-    }
-
-    .video-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding: 0 0 40px 0;
-    }
-
-    .video-card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .video-card video {
-      width: 100%;
+    .dropdown:hover .dropdown-content {
       display: block;
     }
 
-    .video-title {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: none;
+    /* Buttons */
+    .btn {
+      border: none;
+      padding: 8px 20px;
+      margin-left: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-btn {
+      background-color: red;
       color: white;
-      font-weight: bold;
-      font-size: 16px;
-      pointer-events: none;
     }
 
-    .video-card video:hover {
-      filter: brightness(1.1);
+    .join-btn {
+      background-color: red;
+      color: white;
     }
 
-    .view-all {
-      display: flex;
-      justify-content: center;
-      margin-top: 30px;
-    }
-
-    .view-all a {
-      padding: 10px 30px;
-      background-color: #f1a6b8;
-      color: #000;
-      font-weight: bold;
-      border-radius: 6px;
-      text-decoration: none;
+    /* Responsive Fix */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Transparent Header -->
+
+  <!-- Header -->
   <header>
-    <img src="https://i.postimg.cc/C5qdD7fB/Chat-GPT-Image-Jul-5-2025-08-45-13-PM.png" alt="Infectaria Logo">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Logo_placeholder.svg" alt="Logo">
+    </div>
 
     <nav>
-      <a href="all-videos.html">All Videos</a>
+      <div class="dropdown">
+        <a href="#">All Videos ▼</a>
+        <div class="dropdown-content">
+          <a href="all-videos.html">Hentaied Videos</a>
+          <a href="all-lesbian.html">Lesbian Videos</a>
+        </div>
+      </div>
       <a href="models.html">Models</a>
       <a href="categories.html">Categories</a>
-      <div class="auth-buttons">
-        <a class="login-btn" href="login.html">LOGIN</a>
-        <a href="join.html" class="join-btn">JOIN NOW</a>
-      </div>
+      <button class="btn login-btn">LOGIN</button>
+      <button class="btn join-btn">JOIN NOW</button>
     </nav>
   </header>
 
