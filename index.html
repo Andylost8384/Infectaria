@@ -61,14 +61,21 @@
       z-index: 1000;
     }
 
+    /* Logo + Nav wrapper */
+    .left-nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
     header img {
-      height: 60px;
+      height: 70px; /* logo बड़ा */
       object-fit: contain;
     }
 
     nav {
       display: flex;
-      gap: 25px;
+      gap: 20px;
       align-items: center;
     }
 
@@ -78,10 +85,13 @@
       font-weight: bold;
       font-size: 15px;
       transition: 0.3s;
+      padding: 6px 10px;
+      border-radius: 6px;
     }
 
     nav a:hover {
-      color: red;
+      background: red;
+      color: white;
     }
 
     /* Dropdown */
@@ -99,7 +109,7 @@
       position: absolute;
       top: 100%;
       left: 0;
-      background-color: #222;
+      background-color: rgba(0,0,0,0.9);
       min-width: 200px;
       border-radius: 6px;
       overflow: hidden;
@@ -116,6 +126,7 @@
 
     .dropdown-content a:hover {
       background-color: red;
+      color: white;
     }
 
     .dropdown:hover .dropdown-content {
@@ -279,23 +290,24 @@
 <body>
   <!-- Navbar -->
   <header>
-    <img src="https://i.postimg.cc/C5qdD7fB/Chat-GPT-Image-Jul-5-2025-08-45-13-PM.png" alt="Infectaria Logo">
-
-    <nav>
-      <div class="dropdown">
-        <a href="#">All Videos</a>
-        <div class="dropdown-content">
-          <a href="all-videos.html">Hentaied Videos</a>
-          <a href="all-lesbian.html">Lesbian Videos</a>
+    <div class="left-nav">
+      <img src="https://i.postimg.cc/C5qdD7fB/Chat-GPT-Image-Jul-5-2025-08-45-13-PM.png" alt="Infectaria Logo">
+      <nav>
+        <div class="dropdown">
+          <a href="#">All Videos</a>
+          <div class="dropdown-content">
+            <a href="all-videos.html">Hentaied Videos</a>
+            <a href="all-lesbian.html">Lesbian Videos</a>
+          </div>
         </div>
-      </div>
-      <a href="models.html">Models</a>
-      <a href="categories.html">Categories</a>
-      <div class="auth-buttons">
-        <a class="login-btn" href="login.html">LOGIN</a>
-        <a href="join.html" class="join-btn">JOIN NOW</a>
-      </div>
-    </nav>
+        <a href="models.html">Models</a>
+        <a href="categories.html">Categories</a>
+      </nav>
+    </div>
+    <div class="auth-buttons">
+      <a class="login-btn" href="login.html">LOGIN</a>
+      <a href="join.html" class="join-btn">JOIN NOW</a>
+    </div>
   </header>
 
   <div class="hero">
@@ -381,3 +393,4 @@
   </footer>
 </body>
 </html>
+
