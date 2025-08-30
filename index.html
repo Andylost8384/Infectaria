@@ -22,7 +22,6 @@
 
     window.onload = () => {
       const loginBtn = document.querySelector(".login-btn");
-      const joinBtn = document.querySelector(".join-btn");
 
       onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -45,6 +44,7 @@
       font-family: Arial, sans-serif;
       background-color: #0e0e0e;
       color: white;
+      overflow-x: hidden; /* horizontal scroll hata diya */
     }
 
     /* ===== Transparent Navbar ===== */
@@ -66,9 +66,29 @@
       object-fit: contain;
     }
 
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      border-bottom: 2px solid white;
+      padding-bottom: 2px;
+    }
+
     .auth-buttons {
       display: flex;
       gap: 15px;
+      margin-left: 30px;
     }
 
     .auth-buttons a {
@@ -213,10 +233,16 @@
   <!-- Transparent Header -->
   <header>
     <img src="https://i.postimg.cc/C5qdD7fB/Chat-GPT-Image-Jul-5-2025-08-45-13-PM.png" alt="Infectaria Logo">
-    <div class="auth-buttons">
-      <a class="login-btn" href="login.html">LOGIN</a>
-      <a href="join.html" class="join-btn">JOIN NOW</a>
-    </div>
+
+    <nav>
+      <a href="all-videos.html">All Videos</a>
+      <a href="models.html">Models</a>
+      <a href="categories.html">Categories</a>
+      <div class="auth-buttons">
+        <a class="login-btn" href="login.html">LOGIN</a>
+        <a href="join.html" class="join-btn">JOIN NOW</a>
+      </div>
+    </nav>
   </header>
 
   <div class="hero">
