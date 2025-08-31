@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Lesbian Videos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #ff4d4d;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .card {
+      background: #222;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .title {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>All Lesbian Videos</h1>
+  <div class="grid" id="videoGrid"></div>
+
+  <script>
+    async function loadVideos() {
+      const response = await fetch('lesbian.json');
+      const videos = await response.json();
+
+      const grid = document.getElementById('videoGrid');
+      videos.forEach(video => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        card.innerHTML = `
+          <a href="${video.fullUrl}" target="_blank">
+            <img src="${video.previewUrl}" alt="${video.title}">
+          </a>
+          <div class="title">${video.title}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    loadVideos();
+  </script>
+</body>
+</html>
 
