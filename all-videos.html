@@ -2,71 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>All Hentaied Videos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Videos</title>
   <style>
     body {
-      background-color: black;
-      color: white;
+      background-color: #000;
+      color: #fff;
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      text-align: center;
+      padding: 20px;
     }
+
     h1 {
-      margin: 20px 0;
+      text-align: center;
+      margin-bottom: 30px;
     }
+
     .video-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      padding: 20px;
+      justify-items: center;
     }
+
     .video-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 10px;
+      width: 100%;
+      max-width: 320px;
+      cursor: pointer;
+      text-align: center;
     }
+
     .video-card img {
       width: 100%;
       height: auto;
+      border-radius: 8px;
       display: block;
-      border-radius: 10px;
     }
+
     .video-title {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      right: 10px;
-      text-align: left;
-      font-size: 14px;
+      margin-top: 10px;
       font-weight: bold;
-      color: white;
-      text-shadow: 1px 1px 3px black;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <h1>All Hentaied Videos</h1>
-  <div class="video-grid" id="videoGrid">
-    <!-- Videos JSON ke through yahan load honge -->
-  </div>
+  <div class="video-grid" id="videoGrid"></div>
 
   <script>
-    fetch("videos.json")
-      .then(response => response.json())
-      .then(data => {
-        const grid = document.getElementById("videoGrid");
-        data.forEach(video => {
-          const card = document.createElement("div");
-          card.className = "video-card";
+    async function loadVideos() {
+      try {
+        const response = await fetch('videos.json'); // JSON file load karo
+        const videos = await response.json();
+
+        const grid = document.getElementById('videoGrid');
+        grid.innerHTML = '';
+
+        videos.forEach(video => {
+          const card = document.createElement('div');
+          card.className = 'video-card';
+
+          // Agar previewUrl nahi hai toh fallback image lagao
+          const thumbnail = video.previewUrl ? video.previewUrl : 'fallback.jpg';
+
           card.innerHTML = `
-            <img src="${video.thumbnail}" alt="${video.title}">
+            <a href="${video.fullUrl}" target="_blank">
+              <img src="${thumbnail}" alt="${video.title}">
+            </a>
             <div class="video-title">${video.title}</div>
           `;
+
           grid.appendChild(card);
         });
-      })
-      .catch(error => console.error("Error loading videos:", error));
+      } catch (error) {
+        console.error('Error loading videos:', error);
+      }
+    }
+
+    loadVideos();
   </script>
 </body>
 </html>
