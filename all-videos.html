@@ -2,52 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All Hentaied Videos</title>
   <style>
     body {
-      margin: 0;
       background-color: black;
       color: white;
       font-family: Arial, sans-serif;
-    }
-
-    /* Page Title */
-    .page-title {
+      margin: 0;
+      padding: 0;
       text-align: center;
-      font-size: 2.5rem;
-      font-weight: bold;
-      padding: 30px 0 20px 0;
     }
-
-    /* Video Grid */
+    h1 {
+      margin: 20px 0;
+    }
     .video-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       padding: 20px;
     }
-
     .video-card {
       position: relative;
-      border-radius: 10px;
       overflow: hidden;
+      border-radius: 10px;
     }
-
     .video-card img {
       width: 100%;
-      height: 220px; /* Fixed equal height */
-      object-fit: cover;
+      height: auto;
       display: block;
       border-radius: 10px;
     }
-
-    /* Title on top of video */
     .video-title {
       position: absolute;
-      bottom: 10px;
+      top: 10px;
       left: 10px;
-      font-size: 1rem;
+      right: 10px;
+      text-align: left;
+      font-size: 14px;
       font-weight: bold;
       color: white;
       text-shadow: 1px 1px 3px black;
@@ -55,37 +46,27 @@
   </style>
 </head>
 <body>
-
-  <!-- Big Title -->
-  <div class="page-title">All Hentaied Videos</div>
-
-  <!-- Video Grid -->
-  <div class="video-grid">
-    <div class="video-card">
-      <img src="https://via.placeholder.com/400x220" alt="Video 1">
-      <div class="video-title">Clumsy</div>
-    </div>
-    <div class="video-card">
-      <img src="https://via.placeholder.com/400x220" alt="Video 2">
-      <div class="video-title">The Succubus Act 3</div>
-    </div>
-    <div class="video-card">
-      <img src="https://via.placeholder.com/400x220" alt="Video 3">
-      <div class="video-title">The Succubus Act 1</div>
-    </div>
-    <div class="video-card">
-      <img src="https://via.placeholder.com/400x220" alt="Video 4">
-      <div class="video-title">One Quick Stop</div>
-    </div>
-    <div class="video-card">
-      <img src="https://via.placeholder.com/400x220" alt="Video 5">
-      <div class="video-title">Another Video</div>
-    </div>
-    <div class="video-card">
-      <img src="https://via.placeholder.com/400x220" alt="Video 6">
-      <div class="video-title">Last Video</div>
-    </div>
+  <h1>All Hentaied Videos</h1>
+  <div class="video-grid" id="videoGrid">
+    <!-- Videos JSON ke through yahan load honge -->
   </div>
 
+  <script>
+    fetch("videos.json")
+      .then(response => response.json())
+      .then(data => {
+        const grid = document.getElementById("videoGrid");
+        data.forEach(video => {
+          const card = document.createElement("div");
+          card.className = "video-card";
+          card.innerHTML = `
+            <img src="${video.thumbnail}" alt="${video.title}">
+            <div class="video-title">${video.title}</div>
+          `;
+          grid.appendChild(card);
+        });
+      })
+      .catch(error => console.error("Error loading videos:", error));
+  </script>
 </body>
 </html>
