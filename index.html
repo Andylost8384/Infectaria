@@ -49,7 +49,7 @@
 
     /* ===== Navbar ===== */
     header {
-      position: fixed;
+      position: absolute; /* <-- transparent aur image ke upar */
       top: 0;
       left: 0;
       width: 100%;
@@ -57,7 +57,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px 30px;
-      background: rgba(0,0,0,0.9);
+      background: none; /* <-- black strip hat gayi */
       z-index: 1000;
     }
 
@@ -163,12 +163,6 @@
       align-items: center;
     }
 
-    .hero video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
     .hero-content {
       position: absolute;
       top: 30%;
@@ -252,7 +246,7 @@
       position: absolute;
       bottom: 10px;
       left: 10px;
-      background: none;
+      background: none; /* black box hat gaya */
       color: white;
       font-weight: bold;
       font-size: 16px;
@@ -310,9 +304,7 @@
     </div>
   </header>
 
-  <div class="hero">
-    <!-- leave preview video blank for now -->
-  </div>
+  <div class="hero"></div>
 
   <div class="hero-content">
     <h2>BEST REAL LIFE <span>HENTAI</span></h2>
@@ -393,4 +385,3 @@
   </footer>
 </body>
 </html>
-
