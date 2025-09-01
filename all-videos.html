@@ -44,6 +44,13 @@
       font-weight: bold;
       font-size: 1rem;
       text-align: center;
+      color: #fff;
+      text-decoration: none;
+      display: block;
+    }
+
+    .video-title:hover {
+      color: #ff4444;
     }
 
     @media (max-width: 900px) {
@@ -82,8 +89,8 @@
           card.innerHTML = `
             <a href="${video.fullUrl}" target="_blank">
               <img src="${thumbnail}" alt="${video.title}">
+              <span class="video-title">${video.title}</span>
             </a>
-            <div class="video-title">${video.title}</div>
           `;
 
           grid.appendChild(card);
