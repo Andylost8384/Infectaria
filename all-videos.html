@@ -1,106 +1,138 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Videos</title>
-  <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
+<head> 
+  <meta charset="UTF-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <title>All Videos - Infectaria</title> 
+  <style> 
+    body { 
+      font-family: Arial, sans-serif; 
+      background: #111; 
+      color: #fff; 
+      margin: 0; 
+      padding: 0; 
+    } 
+    /* Stylish Heading */ 
+    h1 { 
+      text-align: center; 
+      padding: 20px 0; 
+      color: #ff3366; 
+      font-size: 2.5rem; 
+      letter-spacing: 2px; 
+      position: relative; 
+    } 
+    h1::after { 
+      content: ""; 
+      display: block; 
+      width: 80px; 
+      height: 4px; 
+      background: #ff3366; 
+      margin: 8px auto 0; 
+      border-radius: 2px; 
+    } 
+    /* Fixed 3 videos per row */ 
+    .video-grid { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 15px; 
+      padding: 20px; 
+    } 
+    .video-card { 
+      position: relative; 
+      background: #000; 
+      border-radius: 8px; 
+      overflow: hidden; 
+      cursor: pointer; 
+      transition: transform 0.2s ease; 
+    } 
+    .video-card:hover { 
+      transform: scale(1.03); 
+    } 
+    .video-card video, 
+    .video-card img { 
+      width: 100%; 
+      height: 200px; 
+      object-fit: cover; 
+      display: block; 
+    } 
+    /* Title overlay on top - black transparent hataya */ 
+    .video-title { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      padding: 8px 10px; 
+      font-size: 16px; 
+      font-weight: bold; 
+      color: #fff; 
+      box-sizing: border-box; 
+    } 
+    /* Back button */ 
+    .back-home { 
+      text-align: center; 
+      padding: 20px 0; 
+    } 
+    .back-home a { 
+      color: #fff; 
+      background: #ff3366; 
+      padding: 10px 20px; 
+      border-radius: 5px; 
+      text-decoration: none; 
+      font-weight: bold; 
+    } 
+  </style> 
+</head> 
+<body> 
+  <h1>All Videos</h1> 
+  <div id="videoGrid" class="video-grid"></div> 
+  <div class="back-home"> 
+    <a href="index.html">⬅ Back to Home</a> 
+  </div> 
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+  <script> 
+    fetch('videos.json?v=' + Date.now()) 
+      .then(response => response.json()) 
+      .then(videos => { 
+        const grid = document.getElementById('videoGrid'); 
+        videos.forEach((video, index) => { 
+          const card = document.createElement('div'); 
+          card.classList.add('video-card'); 
 
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      justify-items: center;
-    }
+          const vidElem = document.createElement('video'); 
+          vidElem.src = video.previewUrl; 
+          vidElem.muted = true; 
+          vidElem.preload = "metadata"; 
 
-    .video-card {
-      width: 100%;
-      max-width: 320px;
-      cursor: pointer;
-      text-align: center;
-    }
+          // Fallback thumbnail if video fails 
+          vidElem.onerror = () => { 
+            const fallback = document.createElement('img'); 
+            fallback.src = video.thumbnail || 'default-thumbnail.jpg'; 
+            card.replaceChild(fallback, vidElem); 
+          }; 
 
-    .video-card img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      display: block;
-    }
+          card.addEventListener('mouseenter', () => { 
+            vidElem.play().catch(() => {}); 
+          }); 
+          card.addEventListener('mouseleave', () => { 
+            vidElem.pause(); 
+            vidElem.currentTime = 0; 
+          }); 
 
-    .video-title {
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 1rem;
-      text-align: center;
-      color: #fff;
-      text-decoration: none;
-      display: block;
-    }
+          // Click to go watch.html 
+          card.addEventListener('click', () => { 
+            window.location.href = `watch.html?id=${index}`; 
+          }); 
 
-    .video-title:hover {
-      color: #ff4444;
-    }
+          const title = document.createElement('div'); 
+          title.classList.add('video-title'); 
+          title.textContent = video.title; 
 
-    @media (max-width: 900px) {
-      .video-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .video-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-<body>
-  <h1>All Hentaied Videos</h1>
-  <div class="video-grid" id="videoGrid"></div>
-
-  <script>
-    async function loadVideos() {
-      try {
-        const response = await fetch('videos.json'); // JSON file load karo
-        const videos = await response.json();
-
-        const grid = document.getElementById('videoGrid');
-        grid.innerHTML = '';
-
-        videos.forEach(video => {
-          const card = document.createElement('div');
-          card.className = 'video-card';
-
-          // Agar previewUrl nahi hai toh fallback image lagao
-          const thumbnail = video.previewUrl ? video.previewUrl : 'fallback.jpg';
-
-          card.innerHTML = `
-            <a href="${video.fullUrl}" target="_blank">
-              <img src="${thumbnail}" alt="${video.title}">
-              <span class="video-title">${video.title}</span>
-            </a>
-          `;
-
-          grid.appendChild(card);
-        });
-      } catch (error) {
-        console.error('Error loading videos:', error);
-      }
-    }
-
-    loadVideos();
-  </script>
-</body>
+          card.appendChild(title); 
+          card.appendChild(vidElem); 
+          grid.appendChild(card); 
+        }); 
+      }) 
+      .catch(err => console.error('Error loading videos:', err)); 
+  </script> 
+</body> 
 </html>
