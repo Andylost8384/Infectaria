@@ -3,96 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Videos</title>
+  <title>All Hentaied Videos</title>
   <style>
     body {
       margin: 0;
+      background-color: black;
+      color: white;
       font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
     }
 
+    /* Page Title */
+    .page-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      padding: 30px 0 20px 0;
+    }
+
+    /* Video Grid */
     .video-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* ek line me 3 video */
-      gap: 15px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
       padding: 20px;
     }
 
     .video-card {
       position: relative;
-      cursor: pointer;
+      border-radius: 10px;
       overflow: hidden;
-      border-radius: 6px;
     }
 
-    .video-card video,
     .video-card img {
       width: 100%;
-      height: auto;
+      height: 220px; /* Fixed equal height */
+      object-fit: cover;
       display: block;
-      border-radius: 6px;
+      border-radius: 10px;
     }
 
+    /* Title on top of video */
     .video-title {
       position: absolute;
       bottom: 10px;
       left: 10px;
-      font-size: 14px;
+      font-size: 1rem;
       font-weight: bold;
-      color: #fff;  /* black transparent line hata di */
+      color: white;
+      text-shadow: 1px 1px 3px black;
     }
   </style>
 </head>
 <body>
-  <div class="video-grid" id="videoGrid"></div>
 
-  <script>
-    fetch('videos.json?v=' + Date.now())
-      .then(response => response.json())
-      .then(videos => {
-        const grid = document.getElementById('videoGrid');
+  <!-- Big Title -->
+  <div class="page-title">All Hentaied Videos</div>
 
-        videos.forEach((video, index) => {
-          const card = document.createElement('div');
-          card.classList.add('video-card');
+  <!-- Video Grid -->
+  <div class="video-grid">
+    <div class="video-card">
+      <img src="https://via.placeholder.com/400x220" alt="Video 1">
+      <div class="video-title">Clumsy</div>
+    </div>
+    <div class="video-card">
+      <img src="https://via.placeholder.com/400x220" alt="Video 2">
+      <div class="video-title">The Succubus Act 3</div>
+    </div>
+    <div class="video-card">
+      <img src="https://via.placeholder.com/400x220" alt="Video 3">
+      <div class="video-title">The Succubus Act 1</div>
+    </div>
+    <div class="video-card">
+      <img src="https://via.placeholder.com/400x220" alt="Video 4">
+      <div class="video-title">One Quick Stop</div>
+    </div>
+    <div class="video-card">
+      <img src="https://via.placeholder.com/400x220" alt="Video 5">
+      <div class="video-title">Another Video</div>
+    </div>
+    <div class="video-card">
+      <img src="https://via.placeholder.com/400x220" alt="Video 6">
+      <div class="video-title">Last Video</div>
+    </div>
+  </div>
 
-          const vidElem = document.createElement('video');
-          vidElem.src = video.previewUrl;
-          vidElem.muted = true;
-          vidElem.preload = "metadata";
-
-          // fallback thumbnail
-          vidElem.onerror = () => {
-            const fallback = document.createElement('img');
-            fallback.src = video.thumbnail || 'default-thumbnail.jpg';
-            card.replaceChild(fallback, vidElem);
-          };
-
-          card.addEventListener('mouseenter', () => {
-            vidElem.play().catch(() => {});
-          });
-          card.addEventListener('mouseleave', () => {
-            vidElem.pause();
-            vidElem.currentTime = 0;
-          });
-
-          // click to open watch.html
-          card.addEventListener('click', () => {
-            window.location.href = `watch.html?id=${index}`;
-          });
-
-          const title = document.createElement('div');
-          title.classList.add('video-title');
-          title.textContent = video.title;
-
-          card.appendChild(vidElem);
-          card.appendChild(title);
-
-          grid.appendChild(card);
-        });
-      })
-      .catch(err => console.error('Error loading videos:', err));
-  </script>
 </body>
 </html>
