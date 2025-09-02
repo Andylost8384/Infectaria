@@ -2,149 +2,205 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesbian Videos - Infectaria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All Lesbian Videos • Infectaria</title>
+
+  <!-- Firebase Auth (same as index) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "Key",
+      authDomain: "infectaria-3cacf.firebaseapp.com",
+      projectId: "infectaria-3cacf",
+      storageBucket: "infectaria-3cacf.firebasestorage.app",
+      messagingSenderId: "323281294881",
+      appId: "1:323281294881:web:b339985000dec8b9bc3560"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.addEventListener("load", () => {
+      const loginBtn = document.querySelector(".login-btn");
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          loginBtn.textContent = "LOGOUT";
+          loginBtn.href = "#";
+          loginBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            signOut(auth).then(() => window.location.reload());
+          });
+        } else {
+          loginBtn.textContent = "LOGIN";
+          loginBtn.href = "login.html";
+        }
+      });
+
+      loadLesbianVideos();
+    });
+
+    async function loadLesbianVideos() {
+      try {
+        const res = await fetch("lesbian.json", { cache: "no-store" });
+        const items = await res.json();
+
+        // Latest first
+        items.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        const grid = document.getElementById("lesbian-grid");
+        grid.innerHTML = "";
+
+        items.forEach((v) => {
+          // Safe, direct click target:
+          const link = v.fullUrl || v.fullUrl4k || v.previewUrl || "#";
+
+          // Preview ke liye fallback agar previewUrl "to-add.mp4" ya missing ho
+          const preview = (v.previewUrl && v.previewUrl !== "to-add.mp4")
+            ? v.previewUrl
+            : (v.fullUrl || v.fullUrl4k || "");
+
+          if (!preview) {
+            console.warn("Skipping item without any playable URL:", v.title);
+            return;
+          }
+
+          const card = document.createElement("div");
+          card.className = "video-card";
+          card.innerHTML = `
+            <a href="${link}" target="_blank" rel="noopener noreferrer">
+              <video src="${preview}" muted preload="metadata"
+                onmouseover="this.play()" 
+                onmouseout="this.pause(); this.currentTime=0;">
+              </video>
+              <div class="video-title">${v.title}</div>
+            </a>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Error loading lesbian.json:", err);
+      }
+    }
+  </script>
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #0f0f12;
-      color: #fff;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0e0e0e;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    /* Stylish Heading */
-    h1 {
-      text-align: center;
-      padding: 20px 0;
-      color: #ff3366;
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-      position: relative;
-    }
-
-    h1::after {
-      content: "";
-      display: block;
-      width: 80px;
-      height: 4px;
-      background: #ff3366;
-      margin: 8px auto 0;
-      border-radius: 2px;
-    }
-
-    /* Fixed 3 videos per row */
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      padding: 20px;
-    }
-
-    .video-card {
-      position: relative;
-      background: #000;
-      border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .video-card:hover {
-      transform: scale(1.03);
-    }
-
-    .video-card video,
-    .video-card img {
+    /* ===== Navbar (same look as index) ===== */
+    header {
+      position: sticky;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
     }
 
-    /* Title directly on video without black background */
+    .left-nav { display: flex; align-items: center; gap: 25px; }
+    header img { height: 50px; object-fit: contain; }
+
+    nav { display: flex; gap: 20px; align-items: center; }
+    nav a {
+      text-decoration: none; color: #fff; font-weight: bold; font-size: 15px;
+      transition: 0.3s; padding: 6px 10px; border-radius: 6px;
+    }
+    nav a:hover { background: red; color: #fff; }
+
+    .dropdown { position: relative; }
+    .dropdown > a::after { content: " ▼"; font-size: 12px; }
+    .dropdown-content {
+      display: none; position: absolute; top: 100%; left: 0;
+      background-color: rgba(0,0,0,0.9); min-width: 200px;
+      border-radius: 6px; overflow: hidden; z-index: 2000;
+    }
+    .dropdown-content a { display: block; padding: 10px 15px; color: #fff; text-decoration: none; transition: 0.3s; }
+    .dropdown-content a:hover { background-color: red; color: #fff; }
+    .dropdown:hover .dropdown-content { display: block; }
+
+    .auth-buttons { display: flex; gap: 10px; margin-right: 40px; } /* right se thoda left */
+    .auth-buttons a {
+      text-decoration: none; font-weight: bold; color: #fff; background: red;
+      padding: 8px 16px; border-radius: 6px; transition: 0.3s; white-space: nowrap;
+    }
+    .auth-buttons a:hover { background: darkred; }
+
+    .page-wrap { max-width: 1100px; margin: 30px auto; padding: 0 16px; }
+
+    .section-title {
+      background: linear-gradient(to right, red, darkred);
+      padding: 12px 25px; font-size: 18px; font-weight: bold; color: #fff;
+      display: inline-block; border-top-right-radius: 8px; border-bottom-right-radius: 8px;
+      margin: 10px 0 20px 0;
+    }
+
+    .video-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 10px; padding-bottom: 40px;
+    }
+    @media (min-width: 900px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .video-card { position: relative; overflow: hidden; border-radius: 8px; }
+    .video-card video { width: 100%; display: block; }
+    .video-card video:hover { filter: brightness(1.08); }
+
     .video-title {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      right: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #fff;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.8); /* सिर्फ़ readability के लिए */
-      box-sizing: border-box;
+      position: absolute; left: 10px; bottom: 10px;
+      background: none; color: #fff; font-weight: bold; font-size: 16px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6); pointer-events: none;
     }
 
-    /* Back button */
-    .back-home {
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    .back-home a {
-      color: #fff;
-      background: #ff3366;
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
+    footer {
+      background-color: black; color: white; text-align: center;
+      padding: 40px 20px; margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <h1>Lesbian Videos</h1>
-  <div id="videoGrid" class="video-grid"></div>
+  <header>
+    <div class="left-nav">
+      <a href="index.html"><img src="https://i.postimg.cc/C5qdD7fB/Chat-GPT-Image-Jul-5-2025-08-45-13-PM.png" alt="Infectaria Logo"></a>
+      <nav>
+        <div class="dropdown">
+          <a href="#">All Videos</a>
+          <div class="dropdown-content">
+            <a href="all-videos.html">Hentaied Videos</a>
+            <a href="all-lesbian.html">Lesbian Videos</a>
+          </div>
+        </div>
+        <a href="models.html">Models</a>
+        <a href="categories.html">Categories</a>
+      </nav>
+    </div>
+    <div class="auth-buttons">
+      <a class="login-btn" href="login.html">LOGIN</a>
+      <a class="join-btn" href="join.html">JOIN NOW</a>
+    </div>
+  </header>
 
-  <div class="back-home">
-    <a href="index.html">⬅ Back to Home</a>
+  <div class="page-wrap">
+    <div class="section-title">All Lesbian Videos</div>
+    <div id="lesbian-grid" class="video-grid"></div>
   </div>
 
-  <script>
-    fetch('lesbian.json?v=' + Date.now())
-      .then(response => response.json())
-      .then(videos => {
-        const grid = document.getElementById('videoGrid');
-
-        videos.forEach((video, index) => {
-          const card = document.createElement('div');
-          card.classList.add('video-card');
-
-          const vidElem = document.createElement('video');
-          vidElem.src = video.previewUrl;
-          vidElem.muted = true;
-          vidElem.preload = "metadata";
-
-          // fallback thumbnail
-          vidElem.onerror = () => {
-            const fallback = document.createElement('img');
-            fallback.src = video.thumbnail || 'default-thumbnail.jpg';
-            card.replaceChild(fallback, vidElem);
-          };
-
-          card.addEventListener('mouseenter', () => {
-            vidElem.play().catch(() => {});
-          });
-
-          card.addEventListener('mouseleave', () => {
-            vidElem.pause();
-            vidElem.currentTime = 0;
-          });
-
-          // Click to go watch.html
-          card.addEventListener('click', () => {
-            window.location.href = `watch.html?id=${index}&type=lesbian`;
-          });
-
-          const title = document.createElement('div');
-          title.classList.add('video-title');
-          title.textContent = video.title;
-
-          card.appendChild(title);
-          card.appendChild(vidElem);
-          grid.appendChild(card);
-        });
-      })
-      .catch(err => console.error('Error loading lesbian.json:', err));
-  </script>
+  <footer>
+    <h1 style="font-size: 36px; font-weight: bold; letter-spacing: 2px;">INFECTERIA</h1>
+    <p style="margin: 5px 0; font-size: 18px;">Made by Ice Bear</p>
+    <p style="margin: 5px 0;">
+      <a href="https://t.me/Ice_Bear8384" target="_blank" style="color: #00afff; text-decoration: none;">Telegram: @Ice_Bear8384</a>
+    </p>
+  </footer>
 </body>
 </html>
