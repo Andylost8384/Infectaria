@@ -36,6 +36,47 @@
           loginBtn.href = "login.html";
         }
       });
+
+      // Latest videos load karo
+      loadLatestVideos();
+    }
+
+    async function loadLatestVideos() {
+      try {
+        const [videosRes, lesbianRes] = await Promise.all([
+          fetch("videos.json"),
+          fetch("lesbian.json")
+        ]);
+
+        const videos = await videosRes.json();
+        const lesbians = await lesbianRes.json();
+
+        let allVideos = [...videos, ...lesbians];
+
+        allVideos.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        let latest = allVideos.slice(0, 4);
+
+        const container = document.getElementById("latest-videos");
+        container.innerHTML = "";
+
+        latest.forEach(video => {
+          const card = document.createElement("div");
+          card.className = "video-card";
+          card.innerHTML = `
+            <a href="${video.link}">
+              <video src="${video.preview}" muted preload="metadata"
+                onmouseover="this.play()" 
+                onmouseout="this.pause(); this.currentTime=0;">
+              </video>
+              <div class="video-title">${video.title}</div>
+            </a>
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Error loading videos:", err);
+      }
     }
   </script>
   <style>
@@ -49,7 +90,7 @@
 
     /* ===== Navbar ===== */
     header {
-      position: absolute; /* <-- transparent aur image ke upar */
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
@@ -57,11 +98,10 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px 30px;
-      background: none; /* <-- black strip hat gayi */
+      background: none;
       z-index: 1000;
     }
 
-    /* Logo + Nav wrapper */
     .left-nav {
       display: flex;
       align-items: center;
@@ -69,7 +109,7 @@
     }
 
     header img {
-      height: 70px; /* logo बड़ा */
+      height: 70px;
       object-fit: contain;
     }
 
@@ -94,7 +134,6 @@
       color: white;
     }
 
-    /* Dropdown */
     .dropdown {
       position: relative;
     }
@@ -137,6 +176,7 @@
     .auth-buttons {
       display: flex;
       gap: 10px;
+      margin-right: 40px; /* <-- left ki taraf shift */
     }
 
     .auth-buttons a {
@@ -154,7 +194,7 @@
       background: darkred;
     }
 
-    /* Hero section (Image upload section) */
+    /* Hero section */
     .hero {
       height: 100vh;
       background: url("https://i.postimg.cc/hGzd9KFv/SFW-Hero-Image-Web.webp") no-repeat center center/cover;
@@ -246,7 +286,7 @@
       position: absolute;
       bottom: 10px;
       left: 10px;
-      background: none; /* black box hat gaya */
+      background: none;
       color: white;
       font-weight: bold;
       font-size: 16px;
@@ -320,32 +360,8 @@
 
   <div class="section-title">NEW SCENES ⭐</div>
 
-  <div class="video-grid">
-    <div class="video-card">
-      <a href="the-succubus-act-3.html">
-        <video src="videos/succubus3.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
-        <div class="video-title">The Succubus Act 3</div>
-      </a>
-    </div>
-    <div class="video-card">
-      <a href="the-succubus-act-2.html">
-        <video src="videos/succubus2.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
-        <div class="video-title">The Succubus Act 2</div>
-      </a>
-    </div>
-    <div class="video-card">
-      <a href="the-succubus-act-1.html">
-        <video src="https://archive.org/download/the-succubus-act-1-hentaied_202508/The%20Succubus%20Act%201%20-%20Hentaied.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
-        <div class="video-title">The Succubus Act 1</div>
-      </a>
-    </div>
-    <div class="video-card">
-      <a href="one-quick-stop.html">
-        <video src="videos/onequickstop.mp4" muted preload="metadata" onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"></video>
-        <div class="video-title">One Quick Stop</div>
-      </a>
-    </div>
-  </div>
+  <!-- Latest 4 videos dynamically load होंगे -->
+  <div class="video-grid" id="latest-videos"></div>
 
   <div class="view-all-container" style="text-align: center; margin-top: 20px;">
     <a href="all-videos.html" class="view-all-btn" style="display: inline-block; padding: 10px 20px; margin: 10px; background: #ff004f; color: white; text-decoration: none; border-radius: 8px;">
