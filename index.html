@@ -53,6 +53,7 @@
 
         let allVideos = [...videos, ...lesbians];
 
+        // date को latest से sort
         allVideos.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         let latest = allVideos.slice(0, 4);
@@ -65,7 +66,7 @@
           card.className = "video-card";
           card.innerHTML = `
             <a href="${video.link}">
-              <video src="${video.preview}" muted preload="metadata"
+              <video src="${video.previewUrl}" muted preload="metadata"
                 onmouseover="this.play()" 
                 onmouseout="this.pause(); this.currentTime=0;">
               </video>
@@ -176,7 +177,7 @@
     .auth-buttons {
       display: flex;
       gap: 10px;
-      margin-right: 40px; /* <-- left ki taraf shift */
+      margin-right: 40px;
     }
 
     .auth-buttons a {
