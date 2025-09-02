@@ -38,32 +38,31 @@ function getQueryParam(param) {
 }
 
 const videoId = getQueryParam('id');
+const type = getQueryParam('type') || 'videos'; // default videos.json
 const videoElement = document.getElementById('mainVideo');
 const qualitySelect = document.getElementById('qualitySelect');
 
-fetch('videos.json?v=' + Date.now())
+const jsonFile = type === 'lesbian' ? 'lesbian.json' : 'videos.json';
+
+fetch(jsonFile + '?v=' + Date.now())
   .then(response => response.json())
   .then(videos => {
     const videoData = videos[videoId];
     if (videoData) {
       document.getElementById('videoTitle').textContent = videoData.title;
 
-      // Always add 1080p
       const options = [];
       if (videoData.fullUrl) {
         options.push({label: '1080p', url: videoData.fullUrl});
       }
-      // Add 4K only if available
       if (videoData.fullUrl4k) {
         options.push({label: '4K', url: videoData.fullUrl4k});
       }
 
-      // Load first available quality
       if (options.length > 0) {
         videoElement.src = options[0].url;
       }
 
-      // If more than one quality, show dropdown
       if (options.length > 1) {
         qualitySelect.style.display = 'inline-block';
         options.forEach(opt => {
